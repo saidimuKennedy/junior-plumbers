@@ -269,12 +269,49 @@ export const shopCategories = [
   { icon: "paintbrush", name: "Paints",      count: 86  },
 ];
 
+/** Promo tiles — `image` is a hotlinked product-style photo (Unsplash). */
 export const featuredProducts = [
-  { name: "Ingco Cordless Drill 12V", sku: "ING-CD45-12V", icon: "drill",    price: 4850, originalPrice: 5700, badge: "−15%",  badgeType: "b-yellow" },
-  { name: "Ingco Demolition Hammer",  sku: "ING-DH-1500",  icon: "hammer",   price: 18400,originalPrice: null,  badge: "NEW",   badgeType: "b-yellow" },
-  { name: "Cable Reel · 25m · 2.5mm",sku: "JP-CR-25",      icon: "zap",      price: 4200, originalPrice: null,  badge: "3 LEFT",badgeType: "b-danger" },
-  { name: "Ingco Safety Helmet",      sku: "ING-HH-Y",     icon: "hard-hat", price: 890,  originalPrice: null,  badge: null,    badgeType: ""         },
-];
+  {
+    name: "Ingco Cordless Drill 12V",
+    sku: "ING-CD45-12V",
+    image:
+      "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80",
+    price: 4850,
+    originalPrice: 5700,
+    badge: "−15%",
+    badgeType: "b-yellow",
+  },
+  {
+    name: "Ingco Demolition Hammer",
+    sku: "ING-DH-1500",
+    image:
+      "https://images.pexels.com/photos/7348593/pexels-photo-7348593.jpeg",
+    price: 18400,
+    originalPrice: null,
+    badge: "NEW",
+    badgeType: "b-yellow",
+  },
+  {
+    name: "Cable Reel · 25m · 2.5mm",
+    sku: "JP-CR-25",
+    image:
+      "https://images.pexels.com/photos/17264228/pexels-photo-17264228.jpeg",
+    price: 4200,
+    originalPrice: null,
+    badge: "3 LEFT",
+    badgeType: "b-danger",
+  },
+  {
+    name: "Ingco Safety Helmet",
+    sku: "ING-HH-Y",
+    image:
+      "https://media.istockphoto.com/id/171326814/photo/yellow-hard-hat-on-white-with-clipping-path.jpg?s=1024x1024&w=is&k=20&c=C9pzsxV4V_P4YmEG4Iml6KUVROjqFYEgf8SMhESB3vs=",
+    price: 890,
+    originalPrice: null,
+    badge: null,
+    badgeType: "",
+  },
+] as const;
 
 export const loyaltyStats = [
   { n: "2,400+", l: "Members" },

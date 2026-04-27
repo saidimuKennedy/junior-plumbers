@@ -11,10 +11,6 @@ const catIcons: Record<string, React.ElementType> = {
   zap: Zap, "hard-hat": HardHat, paintbrush: Paintbrush,
 };
 
-const prodIcons: Record<string, React.ElementType> = {
-  drill: Drill, hammer: Drill, zap: Zap, "hard-hat": HardHat,
-};
-
 function fmt(n: number) {
   return "KES " + n.toLocaleString("en-KE");
 }
@@ -73,10 +69,22 @@ export default function StorefrontPage() {
             <button className="btn btn-outline btn-lg">FIND AN OUTLET</button>
           </div>
         </div>
-        <div className="bg-brand-yellow border-[3px] border-brand-black aspect-[4/5] flex items-center justify-center relative">
-          <div className="absolute inset-[14px] border border-brand-black/40" />
-          <div className="absolute top-6 left-6 font-mono text-[10px] tracking-[0.18em] uppercase">[ FEATURED // INGCO ]</div>
-          <Drill size="60%" strokeWidth={0.8} className="text-brand-black" />
+        <div className="relative aspect-[4/5] border-[3px] border-brand-black bg-brand-yellow">
+          <div className="absolute inset-[14px] overflow-hidden border border-brand-black/40">
+            <Image
+              src="https://images.pexels.com/photos/8811529/pexels-photo-8811529.jpeg"
+              alt="Cordless 18V power tool on weathered timber"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1280px) 50vw, 520px"
+              priority
+            />
+          </div>
+          <div
+            className="pointer-events-none absolute top-6 left-6 z-10 max-w-[calc(100%-3rem)] font-mono text-[10px] uppercase tracking-[0.18em] text-paper [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]"
+          >
+            [ FEATURED // INGCO ]
+          </div>
         </div>
       </section>
 
@@ -105,14 +113,19 @@ export default function StorefrontPage() {
         </div>
         <div className="grid grid-cols-4 gap-[18px]">
           {featuredProducts.map((p) => {
-            const Icon = prodIcons[p.icon] ?? Drill;
             return (
               <div key={p.sku} className="bg-surface border border-border">
-                <div className="aspect-square bg-paper-2 flex items-center justify-center border-b border-border relative">
+                <div className="relative aspect-square overflow-hidden border-b border-border bg-paper-2">
                   {p.badge && (
-                    <span className={`badge ${p.badgeType} absolute top-2.5 left-2.5`}>{p.badge}</span>
+                    <span className={`badge ${p.badgeType} absolute top-2.5 left-2.5 z-10`}>{p.badge}</span>
                   )}
-                  <Icon size="50%" strokeWidth={1} className="text-ink-2" />
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 280px"
+                  />
                 </div>
                 <div className="p-4">
                   <div className="font-sans font-semibold text-[14px] leading-snug min-h-9">{p.name}</div>
@@ -121,7 +134,7 @@ export default function StorefrontPage() {
                     {p.originalPrice && <s className="text-ink-3 text-[14px] font-normal mr-1.5">{fmt(p.originalPrice)}</s>}
                     {fmt(p.price)}
                   </div>
-                  <button className="btn btn-secondary w-full mt-3 py-2.5 h-auto">ADD TO CART</button>
+                  <button type="button" className="btn btn-secondary mt-3 h-auto w-full py-2.5">ADD TO CART</button>
                 </div>
               </div>
             );
