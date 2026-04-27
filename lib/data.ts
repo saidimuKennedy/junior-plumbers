@@ -398,6 +398,54 @@ export const shopCategories = [
   { icon: "paintbrush", name: "Paints",      count: 86  },
 ];
 
+/** Full-bleed shop marquee — promotional cards (e-commerce carousel). */
+export type ShopPromoCarouselItem = {
+  image: string;
+  title: string;
+  sub: string;
+  badge?: string;
+};
+
+export const shopPromoCarousel: ShopPromoCarouselItem[] = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=80",
+    title: "Ingco 12V drill",
+    sub: "Tools Tuesday · while stocks last",
+    badge: "−15%",
+  },
+  {
+    image: "https://images.pexels.com/photos/7348593/pexels-photo-7348593.jpeg?auto=compress&cs=tinysrgb&w=900&q=80",
+    title: "Demolition hammer",
+    sub: "Trade counter pricing",
+    badge: "NEW",
+  },
+  {
+    image: "https://images.pexels.com/photos/162553/pexels-photo-162553.jpeg?auto=compress&cs=tinysrgb&w=900&q=80",
+    title: "Hand tools bundle",
+    sub: "Buy 3+ save 10%",
+    badge: "BUNDLE",
+  },
+  {
+    image: "https://images.pexels.com/photos/4484077/pexels-photo-4484077.jpeg?auto=compress&cs=tinysrgb&w=900&q=80",
+    title: "Plumbing week",
+    sub: "PVC & fittings",
+    badge: "8% OFF",
+  },
+  {
+    image: "https://images.pexels.com/photos/17264228/pexels-photo-17264228.jpeg?auto=compress&cs=tinysrgb&w=900&q=80",
+    title: "Cable reel 25m",
+    sub: "Low stock alert price",
+    badge: "DEAL",
+  },
+  {
+    image: "https://images.pexels.com/photos/8960865/pexels-photo-8960865.jpeg?auto=compress&cs=tinysrgb&w=900&q=80",
+    title: "Loyalty double points",
+    sub: "Sat–Sun only",
+    badge: "2× PTS",
+  },
+];
+
 /** Promo tiles — `image` is a hotlinked product-style photo (Unsplash). */
 export const featuredProducts = [
   {
@@ -1133,6 +1181,11 @@ export type OutletDetailModel = {
   crumb: string;
   title: string;
   subtitle: string;
+  /** Full-width hero photo (e.g. storefront / yard) for outlet detail header */
+  heroImage: string;
+  heroImageAlt: string;
+  /** Softer, desaturated treatment (e.g. offline outlet) */
+  heroMuted?: boolean;
   kpis: { label: string; value: string; delta: string; down?: boolean }[];
   recentOrders: {
     id: string;
@@ -1166,6 +1219,9 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     title: "Kiserian Main",
     subtitle:
       "FLAGSHIP · MAGADI ROAD, KISERIAN TOWN · +254 712 000 100 · OPENED MAR 2019",
+    heroImage:
+      "https://images.pexels.com/photos/5692742/pexels-photo-5692742.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Hardware store interior — shelves and building supplies",
     kpis: [
       { label: "Today's revenue", value: "KES 78,420", delta: "88% OF TARGET" },
       { label: "Orders", value: "42", delta: "+6 vs YESTERDAY" },
@@ -1202,6 +1258,9 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     crumb: "OPS // OUTLETS // RONGAI PLAZA",
     title: "Rongai Plaza",
     subtitle: "RONGAI TOWN CENTRE · +254 712 000 201 · OPENED JUN 2021",
+    heroImage:
+      "https://images.pexels.com/photos/3807288/pexels-photo-3807288.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Retail hardware counter and tools display",
     kpis: [
       { label: "Today's revenue", value: "KES 54,120", delta: "72% OF TARGET" },
       { label: "Orders", value: "31", delta: "+3 vs YESTERDAY" },
@@ -1231,6 +1290,9 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     crumb: "OPS // OUTLETS // ONGATA HARDWARE",
     title: "Ongata Hardware",
     subtitle: "PLAZA LEVEL 1 · ONGATA · +254 712 000 302 · OPENED MAR 2022",
+    heroImage:
+      "https://images.pexels.com/photos/4484077/pexels-photo-4484077.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Plumbing and hardware supplies in a store aisle",
     kpis: [
       { label: "Today's revenue", value: "KES 41,880", delta: "60% OF TARGET" },
       { label: "Orders", value: "28", delta: "−2 vs YESTERDAY" },
@@ -1257,6 +1319,10 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     crumb: "OPS // OUTLETS // NGONG ROAD BRANCH",
     title: "Ngong Road Branch",
     subtitle: "NGONG RD · OFFLINE SINCE 09:42 · +254 712 000 404 · OPENED 2022",
+    heroImage:
+      "https://images.pexels.com/photos/4940756/pexels-photo-4940756.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Storefront with closed shutters — branch offline",
+    heroMuted: true,
     kpis: [
       { label: "Today's revenue", value: "KES 32,440", delta: "46% OF TARGET", down: true },
       { label: "Orders", value: "22", delta: "SYNC PAUSED" },
@@ -1281,6 +1347,9 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     crumb: "OPS // OUTLETS // KAREN YARD",
     title: "Karen Yard",
     subtitle: "BOGANI EAST · KAREN · +254 712 000 505 · OPENED JAN 2023",
+    heroImage:
+      "https://images.pexels.com/photos/7213298/pexels-photo-7213298.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Bright hardware shop with tools and equipment",
     kpis: [
       { label: "Today's revenue", value: "KES 28,710", delta: "51% OF TARGET" },
       { label: "Orders", value: "18", delta: "+1 vs YESTERDAY" },
@@ -1307,6 +1376,9 @@ const OUTLET_DETAILS: Record<string, OutletDetailModel> = {
     crumb: "OPS // OUTLETS // MAGADI ROAD STOP",
     title: "Magadi Road Stop",
     subtitle: "MAGADI CORRIDOR · +254 712 000 606 · OPENED JAN 2025",
+    heroImage:
+      "https://images.pexels.com/photos/162553/pexels-photo-162553.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+    heroImageAlt: "Workbench with hand tools and measuring tape",
     kpis: [
       { label: "Today's revenue", value: "KES 12,570", delta: "31% OF TARGET" },
       { label: "Orders", value: "11", delta: "NEW OUTLET RAMP" },

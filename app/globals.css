@@ -145,4 +145,130 @@
     white-space: normal;
     max-width: min(240px, 70vw);
   }
+
+  /* E-commerce promo marquee (duplicated track; 50% = one set width — motion L→R on screen) */
+  @keyframes jp-shop-promo-marquee {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  .jp-shop-promo-track {
+    display: flex;
+    width: max-content;
+    animation: jp-shop-promo-marquee 55s linear infinite;
+    will-change: transform;
+  }
+  .jp-shop-promo-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes jp-shop-promo-sheen {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes jp-shop-promo-eyebrow-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.82; }
+  }
+  .jp-shop-promo-strip {
+    position: relative;
+  }
+  .jp-shop-promo-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 210, 0, 0.12) 45%,
+      rgba(255, 210, 0, 0.2) 50%,
+      rgba(255, 210, 0, 0.12) 55%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: jp-shop-promo-sheen 5s linear infinite;
+  }
+  .jp-shop-promo-strip > * {
+    position: relative;
+    z-index: 1;
+  }
+  .jp-shop-promo-eyebrow {
+    animation: jp-shop-promo-eyebrow-pulse 2.8s ease-in-out infinite;
+  }
+
+  @keyframes jp-loyalty-shimmer-move {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .jp-loyalty-shimmer {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 210, 0, 0.35) 45%,
+      rgba(255, 244, 184, 0.5) 50%,
+      rgba(255, 210, 0, 0.35) 55%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: jp-loyalty-shimmer-move 2.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes jp-text-sparkle {
+    0%, 100% {
+      filter: brightness(1);
+      text-shadow: 0 0 0 transparent;
+    }
+    50% {
+      filter: brightness(1.12);
+      text-shadow: 0 0 14px rgba(255, 210, 0, 0.45);
+    }
+  }
+  .jp-text-sparkle {
+    animation: jp-text-sparkle 2.4s ease-in-out infinite;
+  }
+  @keyframes jp-loyalty-burst-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 40px rgba(255, 210, 0, 0.55);
+    }
+    50% {
+      transform: scale(1.045);
+      box-shadow: 0 0 52px rgba(255, 210, 0, 0.72);
+    }
+  }
+  .jp-loyalty-burst {
+    animation: jp-loyalty-burst-pulse 1.65s ease-in-out infinite;
+  }
+  @keyframes jp-loyalty-modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  .jp-loyalty-modal-inner {
+    animation: jp-loyalty-modal-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jp-shop-promo-strip::before,
+    .jp-shop-promo-eyebrow,
+    .jp-loyalty-shimmer,
+    .jp-text-sparkle,
+    .jp-loyalty-burst,
+    .jp-loyalty-modal-inner {
+      animation: none !important;
+    }
+    .jp-loyalty-burst {
+      transform: none;
+    }
+    .jp-loyalty-modal-inner {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }

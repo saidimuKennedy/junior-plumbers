@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -42,6 +43,15 @@ function MtdTooltip({ active, payload, label }: TipProps) {
 }
 
 export function MtdCompareLineChart({ data }: { data: readonly ReportsMtdCumulativePoint[] }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="h-[260px] w-full min-w-0" aria-hidden />;
+  }
+
   return (
     <div className="h-[260px] w-full min-w-0">
       <ResponsiveContainer width="100%" height="100%">

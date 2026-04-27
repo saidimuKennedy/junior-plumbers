@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -51,6 +51,11 @@ function RevenueTooltip({ active, payload, label }: RevenueTipProps) {
 }
 
 export function RevenueBarChart() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const data: Row[] = useMemo(
     () =>
       revenueChart.map((value, i) => ({
@@ -60,6 +65,10 @@ export function RevenueBarChart() {
       })),
     []
   );
+
+  if (!mounted) {
+    return <div className="h-[240px] w-full min-w-0 px-1" aria-hidden />;
+  }
 
   return (
     <div className="h-[240px] w-full min-w-0 px-1">

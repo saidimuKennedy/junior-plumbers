@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AlertCircle, AlertTriangle } from "lucide-react";
@@ -15,28 +16,74 @@ export default async function OutletDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/outlets" className="t-bracket text-[11px] no-underline hover:opacity-90">
-          ← ALL OUTLETS
-        </Link>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/pos" className="btn btn-secondary btn-sm no-underline">
-            OPEN POS
-          </Link>
-          <button type="button" className="btn btn-outline btn-sm">
-            EDIT OUTLET
-          </button>
-          <button type="button" className="btn btn-outline btn-sm">
-            ROSTER
-          </button>
-        </div>
-      </div>
+      <section className="-mx-8 mb-6 w-[calc(100%+4rem)] overflow-hidden border-b-2 border-rule">
+        <div className="relative min-h-[280px] md:min-h-[340px]">
+          <div className={`absolute inset-0 ${outlet.heroMuted ? "grayscale-[40%]" : ""}`}>
+            <Image
+              src={outlet.heroImage}
+              alt={outlet.heroImageAlt}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              quality={88}
+            />
+          </div>
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-brand-black/25"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/50 to-brand-black/15"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_85%_25%,rgba(255,210,0,0.12),transparent_50%)]"
+            aria-hidden
+          />
+          {outlet.heroMuted && (
+            <div className="absolute inset-0 bg-brand-black/25 backdrop-blur-[1px]" aria-hidden />
+          )}
 
-      <header className="mb-6 border-b-2 border-rule pb-3.5">
-        <BracketLabel>{outlet.crumb}</BracketLabel>
-        <h1 className="mt-2 font-serif text-[40px] font-semibold leading-[1.05]">{outlet.title}</h1>
-        <p className="mt-1.5 font-mono text-[11px] text-ink-3">{outlet.subtitle}</p>
-      </header>
+          <div className="absolute left-0 right-0 top-0 z-20 flex flex-wrap items-start justify-between gap-3 p-6 md:p-8">
+            <Link
+              href="/outlets"
+              className="inline-flex items-center border-l-[3px] border-brand-yellow bg-transparent py-0.5 pl-3 pr-0 font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-paper no-underline [text-shadow:0_2px_14px_rgba(0,0,0,0.85)] hover:text-brand-yellow"
+            >
+              ← ALL OUTLETS
+            </Link>
+            <div className="flex flex-wrap justify-end gap-2">
+              <Link href="/pos" className="btn btn-secondary btn-sm no-underline">
+                OPEN POS
+              </Link>
+              <button
+                type="button"
+                className="btn btn-outline btn-sm border-paper bg-black/30 text-paper backdrop-blur-sm hover:bg-paper/10"
+              >
+                EDIT OUTLET
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline btn-sm border-paper bg-black/30 text-paper backdrop-blur-sm hover:bg-paper/10"
+              >
+                ROSTER
+              </button>
+            </div>
+          </div>
+
+          <header className="relative z-10 flex min-h-[280px] flex-col justify-end p-6 pb-8 pt-24 md:min-h-[340px] md:p-8 md:pb-10 md:pt-28">
+            <BracketLabel className="!border-brand-yellow !bg-transparent !py-0.5 !pr-0 !text-brand-yellow [text-shadow:0_2px_16px_rgba(0,0,0,0.9)]">
+              {outlet.crumb}
+            </BracketLabel>
+            <h1 className="mt-4 font-serif text-[clamp(2rem,4.5vw,2.75rem)] font-semibold leading-[1.05] tracking-tight text-paper">
+              {outlet.title}
+            </h1>
+            <p className="mt-2 max-w-[72ch] font-mono text-[11px] leading-relaxed text-border md:text-[12px]">
+              {outlet.subtitle}
+            </p>
+          </header>
+        </div>
+      </section>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {outlet.kpis.map((k) => (

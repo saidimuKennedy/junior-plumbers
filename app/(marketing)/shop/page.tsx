@@ -7,12 +7,14 @@ import {
   HardHat,
   Paintbrush,
 } from "lucide-react";
+import { ShopLoyaltyJoinButton } from "@/components/marketing/ShopLoyaltyJoinButton";
 import { StorefrontShell } from "@/components/marketing/StorefrontShell";
 import { StorefrontImageHero } from "@/components/marketing/StorefrontImageHero";
 import { StorefrontImageBand } from "@/components/marketing/StorefrontImageBand";
+import { ShopPromoCarousel } from "@/components/marketing/ShopPromoCarousel";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { marketingImagery } from "@/lib/marketing-imagery";
-import { shopCategories, featuredProducts, loyaltyStats } from "@/lib/data";
+import { shopCategories, featuredProducts, loyaltyStats, shopPromoCarousel } from "@/lib/data";
 
 const catIcons: Record<string, React.ElementType> = {
   drill: Drill,
@@ -57,6 +59,8 @@ export default function StorefrontPage() {
           </div>
         </div>
       </StorefrontImageHero>
+
+      <ShopPromoCarousel items={shopPromoCarousel} />
 
       <section id="categories" className="scroll-mt-24 px-6 py-14 md:px-8 md:py-16">
         <div className="mx-auto max-w-[1280px]">
@@ -142,9 +146,7 @@ export default function StorefrontPage() {
               and bulk pricing.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button type="button" className="btn btn-primary btn-lg">
-                Join free
-              </button>
+              <ShopLoyaltyJoinButton className="btn btn-primary btn-lg">Join free</ShopLoyaltyJoinButton>
               <a
                 href="/loyalty"
                 className="btn btn-outline btn-lg border-paper text-paper no-underline hover:bg-paper/10"
