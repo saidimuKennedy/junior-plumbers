@@ -1,3 +1,4 @@
+import { TierCollage, tierBgToVariant } from "@/components/loyalty/TierCollage";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { KpiCard } from "@/components/ui/KpiCard";
 import { Badge } from "@/components/ui/Badge";
@@ -97,16 +98,26 @@ export default function LoyaltyPage() {
         <div className="card-head">
           <BracketLabel>REWARD TIERS // PARTS &amp; LABOUR CLUB</BracketLabel>
         </div>
-        <div className="grid grid-cols-4 border border-border mx-5 mb-5">
+        <div className="mx-5 mb-5 grid grid-cols-4 border border-border">
           {loyaltyTiers.map((tier, i) => (
             <div
               key={tier.tier}
-              className={`p-[18px] ${i < loyaltyTiers.length - 1 ? "border-r border-border" : ""} ${tier.bg}`}
+              className={`relative min-h-[240px] overflow-hidden p-[18px] ${i < loyaltyTiers.length - 1 ? "border-r border-border" : ""} ${tier.bg}`}
             >
-              <BracketLabel className={tier.dark ? "!text-brand-yellow" : ""}>{`TIER 0${tier.tier}`}</BracketLabel>
-              <div className={`font-serif font-semibold text-[24px] mt-1.5 ${tier.dark ? "text-paper" : ""}`}>{tier.name}</div>
-              <div className={`font-mono text-[11px] mt-1 ${tier.dark ? "text-border" : "text-ink-3"}`}>{tier.pts}</div>
-              <div className={`text-[13px] leading-relaxed mt-3.5 ${tier.dark ? "text-border" : "text-ink-2"}`}>{tier.perks}</div>
+              <TierCollage
+                images={tier.collage}
+                dark={tier.dark}
+                variant={tierBgToVariant(tier.bg)}
+              />
+              <div className="relative z-10">
+                <BracketLabel
+                  accent={tier.dark ? "light" : tier.bg === "bg-brand-yellow" ? "black" : "default"}
+                  className={tier.dark ? "!text-brand-yellow" : ""}
+                >{`TIER 0${tier.tier}`}</BracketLabel>
+                <div className={`mt-1.5 font-serif text-[24px] font-semibold ${tier.dark ? "text-paper" : ""}`}>{tier.name}</div>
+                <div className={`mt-1 font-mono text-[11px] ${tier.dark ? "text-border" : "text-ink-3"}`}>{tier.pts}</div>
+                <div className={`mt-3.5 text-[13px] leading-relaxed ${tier.dark ? "text-border" : "text-ink-2"}`}>{tier.perks}</div>
+              </div>
             </div>
           ))}
         </div>

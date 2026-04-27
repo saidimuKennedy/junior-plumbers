@@ -55,12 +55,11 @@
 
 /* ── Component utilities ──────────────────────────────────── */
 @layer components {
-  /* Bracketed label — the signature device */
+  /* Section eyebrow — left rule + mono (no literal brackets) */
   .t-bracket {
-    @apply font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3;
+    @apply inline-flex items-center border-l-2 border-brand-yellow pl-3
+           font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-ink-2;
   }
-  .t-bracket::before { content: "[ "; }
-  .t-bracket::after  { content: " ]"; }
 
   .t-display { @apply font-serif font-semibold text-[60px] leading-[1.02] tracking-tight; }
   .t-h1      { @apply font-serif font-semibold text-[44px] leading-[1.05]; }
