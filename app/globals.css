@@ -135,4 +135,15 @@
   }
   .nav-item:hover { @apply bg-paper-2 text-ink; }
   .nav-item-active { @apply bg-brand-black text-paper; }
+
+  /* Leaflet · custom divIcon markers (react-leaflet) */
+  .leaflet-container .jp-leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;
+  }
+  .leaflet-container .jp-stop-label {
+    word-break: break-word;
+    white-space: normal;
+    max-width: min(240px, 70vw);
+  }
 }

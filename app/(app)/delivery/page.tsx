@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { Store } from "lucide-react";
+import { DeliveryMap } from "@/components/delivery/DeliveryMap";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { Badge } from "@/components/ui/Badge";
 import { deliveries, deliveryDetail, type DeliveryStatus } from "@/lib/data";
@@ -50,48 +48,11 @@ export default function DeliveryPage() {
           })}
         </div>
 
-        {/* Centre: schematic map */}
-        <main className="relative bg-paper-2 overflow-hidden">
-          {/* Grid overlay */}
-          <div className="absolute inset-0" style={{
-            backgroundImage: "linear-gradient(transparent 95%, rgba(10,10,10,0.06) 95%), linear-gradient(to right, transparent 95%, rgba(10,10,10,0.06) 95%)",
-            backgroundSize: "40px 40px",
-          }} />
-          {/* Roads */}
-          <div className="absolute" style={{ left: "8%", top: "30%", right: "8%", height: 6, background: "rgba(10,10,10,0.08)" }} />
-          <div className="absolute" style={{ left: "30%", top: "12%", bottom: "12%", width: 6, background: "rgba(10,10,10,0.08)" }} />
-          <div className="absolute" style={{ left: "60%", top: "20%", bottom: "30%", width: 4, background: "rgba(10,10,10,0.08)", transform: "rotate(8deg)", transformOrigin: "top left" }} />
-          {/* Routes */}
-          <div className="absolute" style={{ left: "30%", top: "calc(30% + 3px)", width: "30%", height: 2, background: "#0A0A0A" }} />
-          <div className="absolute" style={{ left: "60%", top: "calc(30% + 3px)", width: "25%", height: 2, backgroundImage: "repeating-linear-gradient(to right, #0A0A0A 0 6px, transparent 6px 12px)" }} />
-
-          {/* Map pins */}
-          {[
-            { style: { left: "30%", top: "30%" }, label: "KISERIAN MAIN · DEPOT", content: <Store size={14} />, variant: "depot" },
-            { style: { left: "18%", top: "60%" }, label: "#4823 · KAREN",          content: "✓",               variant: "done"  },
-            { style: { left: "60%", top: "30%" }, label: "#4821 · KISERIAN · EN ROUTE", content: "1",          variant: "normal"},
-            { style: { left: "78%", top: "50%" }, label: "#4822 · MAGADI RD · +18 MIN", content: "!",          variant: "danger"},
-            { style: { left: "50%", top: "78%" }, label: "#4826 · ONGATA · EN ROUTE",   content: "2",          variant: "normal"},
-          ].map((pin, i) => (
-            <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={pin.style}>
-              <div className={`w-7 h-7 border-2 flex items-center justify-center font-mono font-bold text-[11px]
-                              ${pin.variant === "depot"  ? "bg-brand-black text-brand-yellow border-brand-black" :
-                                pin.variant === "done"   ? "bg-success text-white border-success" :
-                                pin.variant === "danger" ? "bg-danger text-white border-danger" :
-                                "bg-brand-yellow border-brand-black text-brand-black"}`}>
-                {pin.content}
-              </div>
-              <div className="font-mono text-[10px] bg-surface border border-border px-1.5 py-0.5 mt-1 whitespace-nowrap">{pin.label}</div>
-            </div>
-          ))}
-
-          {/* Live ops card */}
-          <div className="absolute top-5 left-5 bg-surface border border-border p-4 shadow-2">
-            <BracketLabel>LIVE OPS · 4 RIDERS</BracketLabel>
-            <div className="font-serif text-[32px] font-semibold leading-none mt-2">12 deliveries</div>
-            <div className="font-mono text-[11px] text-ink-3 mt-1.5">3 EN ROUTE · 1 DELAYED · 6 SCHEDULED · 2 DONE</div>
-          </div>
-        </main>
+        <DeliveryMap
+          stops={deliveries}
+          selectedId={selectedId}
+          onSelectStop={setSelectedId}
+        />
 
         {/* Right pane: detail */}
         <div className="bg-surface border-l border-border flex flex-col">
