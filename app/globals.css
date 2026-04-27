@@ -55,10 +55,10 @@
 
 /* ── Component utilities ──────────────────────────────────── */
 @layer components {
-  /* Section eyebrow — left rule + mono (no literal brackets) */
+  /* Section eyebrow — black chip + yellow rule */
   .t-bracket {
-    @apply inline-flex items-center border-l-2 border-brand-yellow pl-3
-           font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-ink-2;
+    @apply inline-flex items-center border-l-[3px] border-brand-yellow bg-brand-black
+           py-1 pl-3 pr-3 font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-paper;
   }
 
   .t-display { @apply font-serif font-semibold text-[60px] leading-[1.02] tracking-tight; }

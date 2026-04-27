@@ -23,7 +23,7 @@ export default async function OrderDetailPage({ params }: PageProps) {
   return (
     <div className="mx-auto max-w-[880px]">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/orders" className="t-bracket text-[11px] text-ink-2 no-underline hover:text-ink">
+        <Link href="/orders" className="t-bracket text-[11px] no-underline hover:opacity-90">
           ← BACK TO ORDERS
         </Link>
         <div className="flex flex-wrap gap-2">

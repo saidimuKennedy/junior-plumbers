@@ -16,7 +16,7 @@ export default async function OutletDetailPage({ params }: PageProps) {
   return (
     <>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/outlets" className="t-bracket text-[11px] text-ink-2 no-underline hover:text-ink">
+        <Link href="/outlets" className="t-bracket text-[11px] no-underline hover:opacity-90">
           ← ALL OUTLETS
         </Link>
         <div className="flex flex-wrap gap-2">

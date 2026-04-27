@@ -1,9 +1,8 @@
-export type BracketAccent = "default" | "black" | "light";
+export type BracketAccent = "default" | "light";
 
-/** Override left-rule colour (base is brand yellow from `.t-bracket`). */
+/** `light` = cream rule on black chip (e.g. on very busy dark imagery) */
 const accentClass: Record<BracketAccent, string> = {
   default: "",
-  black: "!border-brand-black",
   light: "!border-paper",
 };
 
@@ -14,7 +13,6 @@ export function BracketLabel({
 }: {
   children: React.ReactNode;
   className?: string;
-  /** `black` on yellow surfaces · `light` on dark backgrounds */
   accent?: BracketAccent;
 }) {
   return (

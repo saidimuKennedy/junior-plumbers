@@ -108,7 +108,7 @@ export default function InvestorLandingPage() {
         {/* Hero */}
         <section className="mx-auto grid max-w-[1200px] gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-20">
           <div>
-            <BracketLabel className="text-ink-3">Design system · multi-outlet ops</BracketLabel>
+            <BracketLabel>Design system · multi-outlet ops</BracketLabel>
             <h1 className="mt-4 font-serif text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight">
               Junior Plumbers, <em className="font-medium italic">by the book.</em>
             </h1>

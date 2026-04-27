@@ -110,10 +110,7 @@ export default function LoyaltyPage() {
                 variant={tierBgToVariant(tier.bg)}
               />
               <div className="relative z-10">
-                <BracketLabel
-                  accent={tier.dark ? "light" : tier.bg === "bg-brand-yellow" ? "black" : "default"}
-                  className={tier.dark ? "!text-brand-yellow" : ""}
-                >{`TIER 0${tier.tier}`}</BracketLabel>
+                <BracketLabel className={tier.dark ? "!text-brand-yellow" : ""}>{`TIER 0${tier.tier}`}</BracketLabel>
                 <div className={`mt-1.5 font-serif text-[24px] font-semibold ${tier.dark ? "text-paper" : ""}`}>{tier.name}</div>
                 <div className={`mt-1 font-mono text-[11px] ${tier.dark ? "text-border" : "text-ink-3"}`}>{tier.pts}</div>
                 <div className={`mt-3.5 text-[13px] leading-relaxed ${tier.dark ? "text-border" : "text-ink-2"}`}>{tier.perks}</div>
