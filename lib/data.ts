@@ -57,25 +57,153 @@ export const deliveries = [
   { id: "#4826", customer: "George Kimani",        address: "Ongata Rongai Plaza",         meta: "RIDER · MARTIN O. · ETA 14:55",     status: "EN ROUTE"  as DeliveryStatus },
 ];
 
-export const deliveryDetail = {
-  id: "#4822",
-  customer: "Peter Otieno",
-  phone: "+254 722 456 891",
-  type: "TRADE",
-  address: "Bins Hardware Supply",
-  addressSub: "Magadi Rd, opposite Total · Kiserian",
-  rider: "Dennis Kamau",
-  vehicle: "KDC 421J · Tuk-tuk",
-  value: "KES 24,800",
-  payment: "PAID · M-PESA",
-  timeline: [
-    { time: "13:14", title: "Order placed",       meta: "VIA POS · KISERIAN MAIN",         done: true,   active: false },
-    { time: "13:22", title: "Picked from depot",  meta: "8 ITEMS · DENNIS K.",             done: true,   active: false },
-    { time: "13:48 · NOW", title: "Delayed on Magadi Rd", meta: "TRAFFIC · ETA 14:50 (+18 MIN)", done: false, active: true  },
-    { time: "— ETA 14:50", title: "Arrive at drop", meta: "",                              done: false,  active: false },
-    { time: "— PENDING",   title: "Proof of delivery", meta: "",                           done: false,  active: false },
-  ],
+export type DeliveryTimelineStep = {
+  time: string;
+  title: string;
+  meta?: string;
+  done: boolean;
+  active: boolean;
 };
+
+export type DeliveryDetailModel = {
+  id: string;
+  customer: string;
+  phone: string;
+  type: string;
+  address: string;
+  addressSub: string;
+  rider: string;
+  vehicle: string;
+  value: string;
+  payment: string;
+  avatarInitials: string;
+  timeline: DeliveryTimelineStep[];
+};
+
+const DELIVERY_DETAILS: Record<string, DeliveryDetailModel> = {
+  "#4821": {
+    id: "#4821",
+    customer: "Mary Wanjiku",
+    phone: "+254 711 203 441",
+    type: "RETAIL",
+    address: "Plot 14, Kiserian Town",
+    addressSub: "Behind Naivas · ground floor",
+    rider: "John Waweru",
+    vehicle: "KDB 118M · Motorcycle",
+    value: "KES 3,420",
+    payment: "COD · ON DELIVERY",
+    avatarInitials: "MW",
+    timeline: [
+      { time: "13:05", title: "Order placed", meta: "APP · PICKUP", done: true, active: false },
+      { time: "13:18", title: "Picked from depot", meta: "3 ITEMS · JOHN W.", done: true, active: false },
+      { time: "14:12 · NOW", title: "En route · Kiserian", meta: "ETA 14:32", done: false, active: true },
+      { time: "— ETA 14:32", title: "Arrive at drop", meta: "", done: false, active: false },
+      { time: "— PENDING", title: "Proof of delivery", meta: "", done: false, active: false },
+    ],
+  },
+  "#4822": {
+    id: "#4822",
+    customer: "Peter Otieno",
+    phone: "+254 722 456 891",
+    type: "TRADE",
+    address: "Bins Hardware Supply",
+    addressSub: "Magadi Rd, opposite Total · Kiserian",
+    rider: "Dennis Kamau",
+    vehicle: "KDC 421J · Tuk-tuk",
+    value: "KES 24,800",
+    payment: "PAID · M-PESA",
+    avatarInitials: "PO",
+    timeline: [
+      { time: "13:14", title: "Order placed", meta: "VIA POS · KISERIAN MAIN", done: true, active: false },
+      { time: "13:22", title: "Picked from depot", meta: "8 ITEMS · DENNIS K.", done: true, active: false },
+      { time: "13:48 · NOW", title: "Delayed on Magadi Rd", meta: "TRAFFIC · ETA 14:50 (+18 MIN)", done: false, active: true },
+      { time: "— ETA 14:50", title: "Arrive at drop", meta: "", done: false, active: false },
+      { time: "— PENDING", title: "Proof of delivery", meta: "", done: false, active: false },
+    ],
+  },
+  "#4823": {
+    id: "#4823",
+    customer: "Angela Kerubo",
+    phone: "+254 733 881 002",
+    type: "RETAIL",
+    address: "Karen · Bogani East",
+    addressSub: "Gate code 4721",
+    rider: "Stephen Njuguna",
+    vehicle: "KDC 902K · Van",
+    value: "KES 18,200",
+    payment: "PAID · CARD",
+    avatarInitials: "AK",
+    timeline: [
+      { time: "12:40", title: "Order placed", meta: "POS · KAREN YARD", done: true, active: false },
+      { time: "12:55", title: "Picked from depot", meta: "6 ITEMS", done: true, active: false },
+      { time: "13:40", title: "Arrived at drop", meta: "SIGNED · STEPHEN N.", done: true, active: false },
+      { time: "14:08", title: "Delivered", meta: "POD UPLOADED", done: true, active: false },
+    ],
+  },
+  "#4824": {
+    id: "#4824",
+    customer: "Samuel Njoroge",
+    phone: "+254 700 112 903",
+    type: "RETAIL",
+    address: "Ngong Town, Stage 2",
+    addressSub: "Scheduled window · 15:00",
+    rider: "—",
+    vehicle: "—",
+    value: "KES 5,100",
+    payment: "PENDING",
+    avatarInitials: "SN",
+    timeline: [
+      { time: "11:02", title: "Order placed", meta: "ONLINE", done: true, active: false },
+      { time: "— 15:00", title: "Assign rider", meta: "UNASSIGNED", done: false, active: true },
+      { time: "— PENDING", title: "Pickup & delivery", meta: "", done: false, active: false },
+    ],
+  },
+  "#4825": {
+    id: "#4825",
+    customer: "Faith Akoth",
+    phone: "+254 722 009 771",
+    type: "RETAIL",
+    address: "Rongai, Tuskys Lane",
+    addressSub: "Scheduled window · 15:30",
+    rider: "—",
+    vehicle: "—",
+    value: "KES 2,890",
+    payment: "M-PESA · ON DISPATCH",
+    avatarInitials: "FA",
+    timeline: [
+      { time: "11:48", title: "Order placed", meta: "WHATSAPP", done: true, active: false },
+      { time: "— 15:30", title: "Assign rider", meta: "UNASSIGNED", done: false, active: true },
+      { time: "— PENDING", title: "Pickup & delivery", meta: "", done: false, active: false },
+    ],
+  },
+  "#4826": {
+    id: "#4826",
+    customer: "George Kimani",
+    phone: "+254 745 334 120",
+    type: "RETAIL",
+    address: "Ongata Rongai Plaza",
+    addressSub: "Shop 12 · rear entrance",
+    rider: "Martin Ochieng",
+    vehicle: "KDB 445N · Motorcycle",
+    value: "KES 7,650",
+    payment: "COD",
+    avatarInitials: "GK",
+    timeline: [
+      { time: "13:28", title: "Order placed", meta: "POS · RONGAI PLAZA", done: true, active: false },
+      { time: "13:45", title: "Picked from depot", meta: "5 ITEMS · MARTIN O.", done: true, active: false },
+      { time: "14:20 · NOW", title: "En route · Ongata", meta: "ETA 14:55", done: false, active: true },
+      { time: "— ETA 14:55", title: "Arrive at drop", meta: "", done: false, active: false },
+      { time: "— PENDING", title: "Proof of delivery", meta: "", done: false, active: false },
+    ],
+  },
+};
+
+export function getDeliveryDetail(id: string): DeliveryDetailModel {
+  return DELIVERY_DETAILS[id] ?? DELIVERY_DETAILS["#4822"];
+}
+
+/** @deprecated Prefer getDeliveryDetail(id) */
+export const deliveryDetail = DELIVERY_DETAILS["#4822"];
 
 // ── Loyalty ──────────────────────────────────────────────────
 export const loyaltyKpis = [
