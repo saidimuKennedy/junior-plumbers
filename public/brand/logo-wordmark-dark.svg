@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80">
+  <rect x="0" y="0" width="360" height="80" fill="#0A0A0A"></rect>
+  <rect x="12" y="12" width="56" height="56" fill="#FFD200"></rect>
+  <rect x="12" y="12" width="56" height="56" fill="none" stroke="#FFD200" stroke-width="2"></rect>
+  <path d="M24 56 L42 38 M42 38 a7 7 0 1 0 -10 -10 a7 7 0 0 0 10 10 z M44 40 L58 54 a3 3 0 0 1 0 4.2 l-1.8 1.8 a3 3 0 0 1 -4.2 0 L42 47" fill="none" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter"></path>
+  <text x="84" y="40" font-family="EB Garamond, serif" font-weight="600" font-size="28" fill="#FAF8F4">JUNIOR PLUMBERS</text>
+  <text x="84" y="64" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#FFD200" letter-spacing="2.2">KISERIAN // EST. 2019</text>
+</svg>

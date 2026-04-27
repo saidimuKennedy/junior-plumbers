@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Junior Plumbers · Delivery</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../_shared.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  .layout { display: grid; grid-template-columns: 360px 1fr 380px; min-height: calc(100vh - 64px); }
+  .col-pane { background: var(--surface); border-right: 1px solid var(--border); display:flex; flex-direction: column; }
+  .col-pane:last-child { border-right: none; border-left: 1px solid var(--border); }
+  .pane-head { padding: 16px 20px; border-bottom: 2px solid var(--rule); display:flex; justify-content: space-between; align-items: center; }
+  .pane-head .ttl { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .pane-head .ct { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  .order { padding: 14px 20px; border-bottom: 1px solid var(--rule-soft); cursor: pointer; }
+  .order:hover { background: var(--paper-2); }
+  .order.active { background: var(--brand-yellow); }
+  .order .top { display:flex; justify-content: space-between; align-items: center; }
+  .order .id { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; }
+  .order .nm { font-weight: 600; font-size: 14px; margin-top: 4px; }
+  .order .addr { font-size: 12px; color: var(--fg-3); margin-top: 2px; }
+  .order .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-3); margin-top: 6px; }
+
+  .map { background: var(--paper-2); position: relative; overflow: hidden; }
+  .map .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(transparent 95%, rgba(10,10,10,0.06) 95%), linear-gradient(to right, transparent 95%, rgba(10,10,10,0.06) 95%); background-size: 40px 40px; }
+  .map .road { position: absolute; background: rgba(10,10,10,0.08); }
+  .pin { position: absolute; transform: translate(-50%, -50%); display:flex; flex-direction: column; align-items: center; }
+  .pin .marker { width: 28px; height: 28px; background: var(--brand-yellow); border: 2px solid var(--brand-black); display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-weight: 700; font-size: 11px; }
+  .pin.depot .marker { background: var(--brand-black); color: var(--brand-yellow); }
+  .pin.done .marker { background: var(--success); color: #fff; border-color: var(--success); }
+  .pin.danger .marker { background: var(--danger); color: #fff; border-color: var(--danger); }
+  .pin .label { font-family: var(--font-mono); font-size: 10px; background: var(--surface); border: 1px solid var(--border); padding: 2px 6px; margin-top: 4px; white-space: nowrap; }
+  .route { position: absolute; height: 2px; background: var(--brand-black); transform-origin: left; }
+  .route.dashed { background: repeating-linear-gradient(to right, var(--brand-black) 0 6px, transparent 6px 12px); }
+
+  .timeline { padding: 0; }
+  .step { display:grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--rule-soft); position: relative; }
+  .step::before { content: ''; position: absolute; left: 31px; top: 0; bottom: 0; width: 2px; background: var(--rule-soft); }
+  .step:first-child::before { top: 14px; }
+  .step:last-child::before { bottom: 50%; }
+  .step .dot { width: 14px; height: 14px; border-radius: 999px; border: 2px solid var(--brand-black); background: var(--surface); margin-top: 4px; z-index: 1; align-self: start; justify-self: center; }
+  .step.done .dot { background: var(--brand-black); }
+  .step.active .dot { background: var(--brand-yellow); border-color: var(--brand-black); box-shadow: 0 0 0 4px rgba(255,210,0,0.3); }
+  .step .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .step .ttl { font-weight: 600; font-size: 14px; margin-top: 2px; }
+  .step .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-tile"><img src="../../assets/logo-mark.svg" width="28" height="28"/></div>
+      <div><div class="wm">Junior Plumbers</div><div class="sub">DELIVERY OPS</div></div>
+    </div>
+    <nav><a>Dashboard</a><a class="active">Deliveries</a><a>Riders</a><a>Routes</a></nav>
+    <div class="end"><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>4 RIDERS LIVE</span><span class="avatar">DM</span></div>
+  </header>
+
+  <div class="layout">
+    <div class="col-pane">
+      <div class="pane-head"><span class="ttl bracket">QUEUE // TODAY</span><span class="ct">12 OPEN</span></div>
+      <div class="order"><div class="top"><span class="id">#4821</span><span class="badge b-info"><span class="dot" style="background:var(--info);"></span>EN ROUTE</span></div><div class="nm">Mary Wanjiku</div><div class="addr">Plot 14, Kiserian Town</div><div class="meta">RIDER · JOHN W. · ETA 14:32</div></div>
+      <div class="order active"><div class="top"><span class="id">#4822</span><span class="badge b-warn"><span class="dot" style="background:var(--warn);"></span>DELAYED</span></div><div class="nm">Peter Otieno · Trade</div><div class="addr">Bins Hardware, Magadi Rd</div><div class="meta">RIDER · DENNIS K. · +18 MIN</div></div>
+      <div class="order"><div class="top"><span class="id">#4823</span><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>DELIVERED</span></div><div class="nm">Angela Kerubo</div><div class="addr">Karen, Bogani East</div><div class="meta">RIDER · STEPHEN N. · 14:08</div></div>
+      <div class="order"><div class="top"><span class="id">#4824</span><span class="badge b-warn"><span class="dot" style="background:var(--warn);"></span>UNASSIGNED</span></div><div class="nm">Samuel Njoroge</div><div class="addr">Ngong Town, Stage 2</div><div class="meta">SCHEDULED · 15:00</div></div>
+      <div class="order"><div class="top"><span class="id">#4825</span><span class="badge b-warn"><span class="dot" style="background:var(--warn);"></span>UNASSIGNED</span></div><div class="nm">Faith Akoth</div><div class="addr">Rongai, Tuskys Lane</div><div class="meta">SCHEDULED · 15:30</div></div>
+      <div class="order"><div class="top"><span class="id">#4826</span><span class="badge b-info"><span class="dot" style="background:var(--info);"></span>EN ROUTE</span></div><div class="nm">George Kimani</div><div class="addr">Ongata Rongai Plaza</div><div class="meta">RIDER · MARTIN O. · ETA 14:55</div></div>
+    </div>
+
+    <main class="map">
+      <div class="grid-bg"></div>
+      <div class="road" style="left: 8%; top: 30%; right: 8%; height: 6px;"></div>
+      <div class="road" style="left: 30%; top: 12%; bottom: 12%; width: 6px;"></div>
+      <div class="road" style="left: 60%; top: 20%; bottom: 30%; width: 4px; transform: rotate(8deg); transform-origin: top left;"></div>
+      <div class="route" style="left: 30%; top: 30%; width: 30%;"></div>
+      <div class="route dashed" style="left: 60%; top: 30%; width: 25%;"></div>
+
+      <div class="pin depot" style="left: 30%; top: 30%;"><div class="marker"><i data-lucide="store" width="14" height="14"></i></div><div class="label">KISERIAN MAIN · DEPOT</div></div>
+      <div class="pin done" style="left: 18%; top: 60%;"><div class="marker">✓</div><div class="label">#4823 · KAREN</div></div>
+      <div class="pin" style="left: 60%; top: 30%;"><div class="marker">1</div><div class="label">#4821 · KISERIAN · EN ROUTE</div></div>
+      <div class="pin danger" style="left: 78%; top: 50%;"><div class="marker">!</div><div class="label">#4822 · MAGADI RD · +18 MIN</div></div>
+      <div class="pin" style="left: 50%; top: 78%;"><div class="marker">2</div><div class="label">#4826 · ONGATA · EN ROUTE</div></div>
+
+      <div style="position:absolute;top:20px;left:20px;background:var(--surface);border:1px solid var(--border);padding:14px 18px;box-shadow:var(--shadow-2);">
+        <div class="t-bracket" style="font-size:10px;">LIVE OPS · 4 RIDERS</div>
+        <div style="font-family:var(--font-serif);font-size:32px;font-weight:600;line-height:1;margin-top:8px;">12 deliveries</div>
+        <div class="meta" style="font-size:11px;margin-top:6px;">3 EN ROUTE · 1 DELAYED · 6 SCHEDULED · 2 DONE</div>
+      </div>
+    </main>
+
+    <div class="col-pane">
+      <div class="pane-head"><span class="ttl bracket">DELIVERY #4822 // DETAIL</span></div>
+      <div style="padding: 16px 20px; border-bottom: 1px solid var(--rule-soft);">
+        <div style="display:flex; gap: 12px; align-items: center;">
+          <span class="avatar" style="width:44px;height:44px;font-size:14px;">PO</span>
+          <div><div style="font-weight:600;font-size:15px;">Peter Otieno</div><div class="meta" style="font-size:11px;">+254 722 456 891 · TRADE</div></div>
+        </div>
+        <div style="margin-top:14px; padding: 12px 14px; background: var(--paper); border-left: 3px solid var(--brand-black);">
+          <div class="t-bracket" style="font-size:10px;">DROP ADDRESS</div>
+          <div style="font-family:var(--font-serif);font-size:16px;margin-top:4px;">Bins Hardware Supply</div>
+          <div style="font-size:13px;color:var(--fg-2);">Magadi Rd, opposite Total · Kiserian</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+          <div><div class="t-bracket" style="font-size:10px;">RIDER</div><div style="font-weight:600;font-size:14px;margin-top:4px;">Dennis Kamau</div></div>
+          <div><div class="t-bracket" style="font-size:10px;">VEHICLE</div><div style="font-weight:600;font-size:14px;margin-top:4px;">KDC 421J · Tuk-tuk</div></div>
+          <div><div class="t-bracket" style="font-size:10px;">VALUE</div><div style="font-family:var(--font-serif);font-size:20px;margin-top:4px;">KES 24,800</div></div>
+          <div><div class="t-bracket" style="font-size:10px;">PAYMENT</div><div style="font-weight:600;font-size:14px;margin-top:4px;color:var(--success);">PAID · M-PESA</div></div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="step done"><span class="dot"></span><div><div class="lbl">13:14</div><div class="ttl">Order placed</div><div class="meta">VIA POS · KISERIAN MAIN</div></div></div>
+        <div class="step done"><span class="dot"></span><div><div class="lbl">13:22</div><div class="ttl">Picked from depot</div><div class="meta">8 ITEMS · DENNIS K.</div></div></div>
+        <div class="step active"><span class="dot"></span><div><div class="lbl">13:48 · NOW</div><div class="ttl">Delayed on Magadi Rd</div><div class="meta">TRAFFIC · ETA 14:50 (+18 MIN)</div></div></div>
+        <div class="step"><span class="dot"></span><div><div class="lbl">— ETA 14:50</div><div class="ttl">Arrive at drop</div></div></div>
+        <div class="step"><span class="dot"></span><div><div class="lbl">— PENDING</div><div class="ttl">Proof of delivery</div></div></div>
+      </div>
+      <div style="padding:16px 20px; display:flex; gap:8px; border-top: 2px solid var(--rule); margin-top: auto;">
+        <button class="btn btn-outline" style="flex:1;">CALL RIDER</button>
+        <button class="btn btn-primary" style="flex:1;">REASSIGN</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

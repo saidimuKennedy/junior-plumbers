@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Junior Plumbers · Social &amp; Leads</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../_shared.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  .layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
+  .kpi-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .two-col { display:grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  .post { display:grid; grid-template-columns: 56px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--rule-soft); align-items: flex-start; }
+  .post:last-child { border-bottom: none; }
+  .ch-tile { width: 44px; height: 44px; background: var(--brand-yellow); border: 2px solid var(--brand-black); display:flex; align-items:center; justify-content:center; }
+  .ch-tile.ig { background: #0A0A0A; color: var(--brand-yellow); }
+  .ch-tile.fb { background: #1F4FB8; color: #fff; border-color: #1F4FB8; }
+  .ch-tile.wa { background: #1F7A3A; color: #fff; border-color: #1F7A3A; }
+  .ch-tile.tt { background: #0A0A0A; color: #fff; }
+  .lead { display:grid; grid-template-columns: 32px 1fr auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); align-items: center; }
+  .lead:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-tile"><img src="../../assets/logo-mark.svg" width="28" height="28"/></div><div><div class="wm">Junior Plumbers</div><div class="sub">SOCIAL &amp; LEADS</div></div></div>
+    <nav><a>Inbox</a><a class="active">Calendar</a><a>Leads</a><a>Performance</a></nav>
+    <div class="end"><button class="btn btn-primary btn-sm">+ NEW POST</button><span class="avatar">SK</span></div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="group">Channels</div>
+      <div class="item"><i data-lucide="instagram"></i>Instagram</div>
+      <div class="item"><i data-lucide="facebook"></i>Facebook</div>
+      <div class="item"><i data-lucide="message-circle"></i>WhatsApp Biz</div>
+      <div class="item"><i data-lucide="music"></i>TikTok</div>
+      <div class="group">Workspace</div>
+      <div class="item active"><i data-lucide="calendar"></i>Calendar</div>
+      <div class="item"><i data-lucide="inbox"></i>Inbox · 14</div>
+      <div class="item"><i data-lucide="users"></i>Leads</div>
+      <div class="item"><i data-lucide="bar-chart-3"></i>Performance</div>
+    </aside>
+
+    <main class="page">
+      <div class="page-head">
+        <div class="title-block">
+          <span class="crumb bracket">SOCIAL // 4 CHANNELS // OCT 24</span>
+          <h1>This week's calendar</h1>
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm">WEEK</button>
+          <button class="btn btn-secondary btn-sm">MONTH</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="lbl">Reach · 7d</div><div class="num">38,420</div><div class="delta">+18.6% vs LAST WEEK</div></div>
+        <div class="kpi"><div class="lbl">Engagement</div><div class="num">4.8%</div><div class="delta">+0.6 pts</div></div>
+        <div class="kpi"><div class="lbl">Leads captured</div><div class="num">62</div><div class="delta">+12 vs LAST WEEK</div></div>
+        <div class="kpi"><div class="lbl">Inbox · pending</div><div class="num">14</div><div class="delta down">3 OVERDUE</div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">SCHEDULED // THIS WEEK</span><span class="meta">11 POSTS · 4 CHANNELS</span></div>
+
+          <div class="post"><div class="ch-tile ig"><i data-lucide="instagram"></i></div><div><div style="font-weight:600;font-size:14px;">Tools Tuesday · Ingco Drill carousel</div><div style="font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-2);margin-top:4px;">"Drilling through brick or hanging a frame — the 12V handles both. KES 4,850 today only."</div><div class="meta" style="font-size:11px;margin-top:8px;">INSTAGRAM · 3 SLIDES · LINK IN BIO</div></div><div style="text-align:right;"><div class="t-bracket" style="font-size:10px;">TODAY · 09:00</div><div style="margin-top:6px;"><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>QUEUED</span></div></div></div>
+
+          <div class="post"><div class="ch-tile fb"><i data-lucide="facebook"></i></div><div><div style="font-weight:600;font-size:14px;">Trade Day Karen · event invite</div><div style="font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-2);margin-top:4px;">"This Saturday, our Karen yard opens early for trade members. Coffee, cement, and 12% off everything."</div><div class="meta" style="font-size:11px;margin-top:8px;">FACEBOOK · EVENT POST · CTA: RSVP</div></div><div style="text-align:right;"><div class="t-bracket" style="font-size:10px;">TUE · 14:00</div><div style="margin-top:6px;"><span class="badge b-warn"><span class="dot" style="background:var(--warn);"></span>NEEDS REVIEW</span></div></div></div>
+
+          <div class="post"><div class="ch-tile wa"><i data-lucide="message-circle"></i></div><div><div style="font-weight:600;font-size:14px;">Loyalty broadcast · 240 members</div><div style="font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-2);margin-top:4px;">"You're 320 points away from Master tier. Save 1.5x on every shilling spent. See you at any outlet."</div><div class="meta" style="font-size:11px;margin-top:8px;">WHATSAPP BIZ · SEGMENTED · TIER 02</div></div><div style="text-align:right;"><div class="t-bracket" style="font-size:10px;">WED · 10:00</div><div style="margin-top:6px;"><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>QUEUED</span></div></div></div>
+
+          <div class="post"><div class="ch-tile tt"><i data-lucide="music"></i></div><div><div style="font-weight:600;font-size:14px;">Mason hack · cement mixing reel</div><div style="font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-2);margin-top:4px;">"30-second mason hack from our Ngong yard. Tag a builder who needs to see this."</div><div class="meta" style="font-size:11px;margin-top:8px;">TIKTOK · 32s VIDEO · DRAFT</div></div><div style="text-align:right;"><div class="t-bracket" style="font-size:10px;">THU · 17:00</div><div style="margin-top:6px;"><span class="badge b-outline">DRAFT</span></div></div></div>
+
+          <div class="post"><div class="ch-tile ig"><i data-lucide="instagram"></i></div><div><div style="font-weight:600;font-size:14px;">Customer wall · Mary's bathroom</div><div style="font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-2);margin-top:4px;">"Mary picked up everything for her bathroom reno from one shelf. Receipts, not regrets."</div><div class="meta" style="font-size:11px;margin-top:8px;">INSTAGRAM · 1 IMAGE · UGC PERMISSION ✓</div></div><div style="text-align:right;"><div class="t-bracket" style="font-size:10px;">FRI · 12:00</div><div style="margin-top:6px;"><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>QUEUED</span></div></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">LEADS // RECENT</span><span class="meta">62 · 7d</span></div>
+          <div class="lead"><span class="avatar" style="width:32px;height:32px;font-size:11px;">FA</span><div><div style="font-weight:600;font-size:14px;">Faith Akoth</div><div class="meta" style="font-size:11px;">INSTAGRAM DM · TILE PRICING · 22 OCT</div></div><span class="badge b-info"><span class="dot" style="background:var(--info);"></span>NEW</span></div>
+          <div class="lead"><span class="avatar" style="width:32px;height:32px;font-size:11px;">GK</span><div><div style="font-weight:600;font-size:14px;">George Kimani</div><div class="meta" style="font-size:11px;">WHATSAPP · BULK CEMENT · 22 OCT</div></div><span class="badge b-warn"><span class="dot" style="background:var(--warn);"></span>QUOTED</span></div>
+          <div class="lead"><span class="avatar" style="width:32px;height:32px;font-size:11px;">JK</span><div><div style="font-weight:600;font-size:14px;">Jane Kamene</div><div class="meta" style="font-size:11px;">FACEBOOK COMMENT · 21 OCT</div></div><span class="badge b-info"><span class="dot" style="background:var(--info);"></span>NEW</span></div>
+          <div class="lead"><span class="avatar" style="width:32px;height:32px;font-size:11px;">DM</span><div><div style="font-weight:600;font-size:14px;">Daniel Maina</div><div class="meta" style="font-size:11px;">WHATSAPP · TRADE A/C INQUIRY · 21 OCT</div></div><span class="badge b-success"><span class="dot" style="background:var(--success);"></span>WON · KES 18K</span></div>
+          <div class="lead"><span class="avatar" style="width:32px;height:32px;font-size:11px;">RW</span><div><div style="font-weight:600;font-size:14px;">Rose Wairimu</div><div class="meta" style="font-size:11px;">INSTAGRAM · 20 OCT · NO REPLY</div></div><span class="badge b-danger"><span class="dot" style="background:var(--danger);"></span>OVERDUE</span></div>
+          <div style="padding-top:14px; margin-top:8px; border-top: 2px solid var(--rule); display:flex;justify-content:space-between;align-items:center;">
+            <div><div class="t-bracket" style="font-size:10px;">CONVERSION · 7D</div><div class="serif" style="font-size:24px;font-weight:600;margin-top:4px;">19.4% · KES 184k</div></div>
+            <button class="btn btn-outline btn-sm">OPEN INBOX</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:16px;"></div>
+
+      <div class="card">
+        <div class="card-head"><span class="ttl bracket">COMPOSER // QUICK POST</span><span class="meta">DRAFTING</span></div>
+        <div style="display:grid; grid-template-columns: 1fr 280px; gap: 24px; align-items:flex-start;">
+          <div style="display:flex; flex-direction:column; gap: 12px;">
+            <div class="field"><span class="lbl">Caption · serif italic preview</span><textarea class="input" rows="4" style="font-family: var(--font-serif); font-style: italic; font-size: 16px;">Drilling through brick or hanging a frame — the 12V handles both. KES 4,850 today only at any of our six outlets. Tag a friend who's been talking about that DIY project for months.</textarea></div>
+            <div style="display:flex;gap:12px;">
+              <label class="row gap-2"><input type="checkbox" checked/> Instagram</label>
+              <label class="row gap-2"><input type="checkbox" checked/> Facebook</label>
+              <label class="row gap-2"><input type="checkbox"/> WhatsApp</label>
+              <label class="row gap-2"><input type="checkbox"/> TikTok</label>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-outline btn-sm">SAVE DRAFT</button>
+              <button class="btn btn-secondary btn-sm">SCHEDULE</button>
+              <button class="btn btn-primary btn-sm">PUBLISH NOW →</button>
+            </div>
+          </div>
+          <div style="border:1px solid var(--border); padding: 14px;">
+            <div class="t-bracket" style="font-size:10px;">PREVIEW · INSTAGRAM</div>
+            <div style="aspect-ratio: 1; background: var(--brand-yellow); border: 2px solid var(--brand-black); margin-top:10px; display:flex; align-items:center; justify-content:center;"><i data-lucide="drill" style="width:64px;height:64px;stroke-width:1;"></i></div>
+            <div style="font-family:var(--font-serif);font-style:italic;font-size:13px;color:var(--fg-2);margin-top:10px;line-height:1.4;">Drilling through brick or hanging a frame — the 12V handles both…</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

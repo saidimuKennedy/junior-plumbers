@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Junior Plumbers · Admin Dashboard</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../_shared.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  .layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
+  .kpi-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .two-col { display:grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .chart { height: 220px; background: linear-gradient(transparent 90%, var(--rule-soft) 90%) repeat-y, linear-gradient(to right, transparent 90%, var(--rule-soft) 90%) repeat-x; background-size: 100% 25%, 12.5% 100%; position: relative; padding: 16px; }
+  .bar { position: absolute; bottom: 0; width: 5%; background: var(--brand-yellow); border-top: 2px solid var(--brand-black); }
+  .bar.b { background: var(--brand-black); border-top: none; }
+  .outlet-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 80px; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--rule-soft); align-items: center; }
+  .outlet-row:last-child { border-bottom: none; }
+  .progress { height: 6px; background: var(--paper-2); position: relative; }
+  .progress > i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--brand-black); }
+  .alert { display: grid; grid-template-columns: 16px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+  .alert:last-child { border-bottom: none; }
+  .alert .ico { width: 16px; height: 16px; }
+  .alert.warn .ico { color: var(--warn); }
+  .alert.danger .ico { color: var(--danger); }
+  .alert .title { font-size: 14px; font-weight: 500; }
+  .alert .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-tile"><img src="../../assets/logo-mark.svg" width="28" height="28"/></div>
+      <div><div class="wm">Junior Plumbers</div><div class="sub">KISERIAN // OPS</div></div>
+    </div>
+    <nav>
+      <a class="active">Dashboard</a><a>Outlets</a><a>Inventory</a><a>Orders</a><a>Reports</a>
+    </nav>
+    <div class="end">
+      <span class="badge b-yellow">ALL OUTLETS LIVE</span>
+      <span class="avatar">JM</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="group">Operations</div>
+      <div class="item active"><i data-lucide="bar-chart-3"></i>Overview</div>
+      <div class="item"><i data-lucide="store"></i>Outlets</div>
+      <div class="item"><i data-lucide="package"></i>Inventory</div>
+      <div class="item"><i data-lucide="receipt"></i>Orders</div>
+      <div class="item"><i data-lucide="truck"></i>Deliveries</div>
+      <div class="group">Growth</div>
+      <div class="item"><i data-lucide="megaphone"></i>Promotions</div>
+      <div class="item"><i data-lucide="users"></i>Loyalty</div>
+      <div class="item"><i data-lucide="message-square"></i>Social & Leads</div>
+      <div class="group">Admin</div>
+      <div class="item"><i data-lucide="settings"></i>Settings</div>
+    </aside>
+
+    <main class="page">
+      <div class="page-head">
+        <div class="title-block">
+          <span class="crumb bracket">OPS // ALL OUTLETS // OCT 24, 2025</span>
+          <h1>Outlet performance</h1>
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm">EXPORT CSV</button>
+          <button class="btn btn-primary btn-sm">+ NEW REPORT</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="lbl">Revenue · today</div><div class="num">KES 248,140</div><div class="delta">+12.4% vs LAST WEEK</div></div>
+        <div class="kpi"><div class="lbl">Orders</div><div class="num">182</div><div class="delta">+8 vs YESTERDAY</div></div>
+        <div class="kpi"><div class="lbl">Avg basket</div><div class="num">KES 1,363</div><div class="delta down">−3.1% vs LAST WEEK</div></div>
+        <div class="kpi"><div class="lbl">Outlets reporting</div><div class="num">6 / 7</div><div class="delta down">NGONG OFFLINE 14 MIN</div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">REVENUE // LAST 14 DAYS</span><span class="meta">KES, ALL OUTLETS</span></div>
+          <div class="chart" id="chart"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">ALERTS // LIVE</span><span class="meta">4 ACTIVE</span></div>
+          <div class="alert danger"><i class="ico" data-lucide="alert-triangle"></i><div><div class="title">Stock low · INGCO CD-12V</div><div class="meta">KISERIAN MAIN · 3 LEFT</div></div><span class="badge b-danger">CRITICAL</span></div>
+          <div class="alert warn"><i class="ico" data-lucide="alert-circle"></i><div><div class="title">Ngong outlet offline</div><div class="meta">SINCE 09:42 · 14 MIN</div></div><span class="badge b-warn">PENDING</span></div>
+          <div class="alert warn"><i class="ico" data-lucide="alert-circle"></i><div><div class="title">Delivery #4818 delayed</div><div class="meta">RIDER · TRAFFIC ON MAGADI RD</div></div><span class="badge b-warn">+18 MIN</span></div>
+          <div class="alert"><i class="ico" data-lucide="check-circle-2" style="color:var(--success);"></i><div><div class="title">Promo "Tools Tuesday" launched</div><div class="meta">ACTIVE TILL 18:00</div></div><span class="badge b-success">LIVE</span></div>
+        </div>
+      </div>
+
+      <div style="height:16px;"></div>
+
+      <div class="card">
+        <div class="card-head"><span class="ttl bracket">OUTLETS // TODAY</span><span class="meta">SORTED BY REVENUE</span></div>
+        <div class="outlet-row" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);border-bottom:2px solid var(--rule);"><span>Outlet</span><span>Revenue</span><span>Target progress</span><span style="text-align:right;">Status</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Kiserian Main</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">17 STAFF · MGR. JANE M.</div></div><div class="serif tabular" style="font-size:22px;">KES 78,420</div><div><div class="progress"><i style="width:88%;"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">88% of KES 90,000</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>OPEN</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Rongai Plaza</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">11 STAFF · MGR. PETER O.</div></div><div class="serif tabular" style="font-size:22px;">KES 54,120</div><div><div class="progress"><i style="width:72%;"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">72% of KES 75,000</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>OPEN</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Ongata Hardware</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">8 STAFF · MGR. MARY W.</div></div><div class="serif tabular" style="font-size:22px;">KES 41,880</div><div><div class="progress"><i style="width:60%;"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">60% of KES 70,000</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>OPEN</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Ngong Road Branch</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">9 STAFF · MGR. SAMUEL N.</div></div><div class="serif tabular" style="font-size:22px;">KES 32,440</div><div><div class="progress"><i style="width:46%;background:var(--warn);"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">46% of KES 70,000</div></div><span class="badge b-warn" style="justify-self:end;"><span class="dot" style="background:var(--warn);"></span>OFFLINE</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Karen Yard</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">6 STAFF · MGR. ANGELA K.</div></div><div class="serif tabular" style="font-size:22px;">KES 28,710</div><div><div class="progress"><i style="width:51%;"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">51% of KES 56,000</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>OPEN</span></div>
+        <div class="outlet-row"><div><div style="font-weight:600;">Magadi Road Stop</div><div class="meta mono" style="font-size:11px;color:var(--fg-3);">4 STAFF · MGR. DENNIS M.</div></div><div class="serif tabular" style="font-size:22px;">KES 12,570</div><div><div class="progress"><i style="width:31%;"></i></div><div class="meta" style="font-size:11px;margin-top:4px;">31% of KES 40,000</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>OPEN</span></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script>
+  // Render bars in chart
+  const heights = [40,55,42,68,58,72,80,52,64,78,86,70,90,95];
+  const c = document.getElementById('chart');
+  heights.forEach((h, i) => {
+    const b = document.createElement('div');
+    b.className = 'bar' + (i === heights.length - 1 ? '' : (i % 2 === 0 ? ' b' : ''));
+    b.style.left = (4 + i * 6.6) + '%';
+    b.style.height = (h * 0.85) + '%';
+    c.appendChild(b);
+  });
+  lucide.createIcons();
+</script>
+</body>
+</html>

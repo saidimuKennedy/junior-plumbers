@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Brand design tokens ──────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-brand-yellow:       #FFD200;
+  --color-brand-yellow-deep:  #E6BC00;
+  --color-brand-yellow-soft:  #FFF4B8;
+  --color-brand-black:        #0A0A0A;
+  --color-brand-black-soft:   #1F1F1F;
+  --color-paper:              #FAF8F4;
+  --color-paper-2:            #F2EFE8;
+  --color-surface:            #FFFFFF;
+  --color-ink:                #0A0A0A;
+  --color-ink-2:              #3A3A3A;
+  --color-ink-3:              #6B6B6B;
+  --color-ink-4:              #A1A09B;
+  --color-rule:               #1A1A1A;
+  --color-rule-soft:          #E5E2DA;
+  --color-border:             #DAD6CC;
+  --color-border-strong:      #1A1A1A;
+  --color-success:            #1F7A3A;
+  --color-success-bg:         #E8F2EA;
+  --color-warn:               #B8761F;
+  --color-warn-bg:            #FBF1DC;
+  --color-danger:             #B3261E;
+  --color-danger-bg:          #F9E5E3;
+  --color-info:               #1F4FB8;
+  --color-info-bg:            #E5ECF9;
+
+  /* Border radius — sharp by default */
+  --radius:      0px;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 0 rgba(10,10,10,0.04), 0 1px 2px rgba(10,10,10,0.04);
+  --shadow-2: 0 2px 4px rgba(10,10,10,0.06), 0 4px 12px rgba(10,10,10,0.04);
+  --shadow-3: 0 8px 24px rgba(10,10,10,0.10);
 }
 
+/* Font families reference next/font CSS vars set on <html> */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--jp-serif), "EB Garamond", serif;
+  --font-sans:  var(--jp-sans), "Inter", system-ui, sans-serif;
+  --font-mono:  var(--jp-mono), "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Base ─────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { border-radius: 0; }
+  body { @apply bg-paper text-ink font-sans antialiased; }
+}
+
+/* ── Component utilities ──────────────────────────────────── */
+@layer components {
+  /* Bracketed label — the signature device */
+  .t-bracket {
+    @apply font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3;
   }
-}
+  .t-bracket::before { content: "[ "; }
+  .t-bracket::after  { content: " ]"; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .t-display { @apply font-serif font-semibold text-[60px] leading-[1.02] tracking-tight; }
+  .t-h1      { @apply font-serif font-semibold text-[44px] leading-[1.05]; }
+  .t-h2      { @apply font-serif font-semibold text-[34px] leading-tight; }
+  .t-eyebrow { @apply font-mono text-[11px] uppercase tracking-[0.08em] text-ink-3; }
+  .t-meta    { @apply font-mono text-[11px] tracking-wide text-ink-3; }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-[18px] h-11
+           font-sans font-semibold text-[13px] uppercase tracking-[0.06em]
+           border-2 border-brand-black cursor-pointer
+           transition-colors duration-150;
+  }
+  .btn-primary   { @apply bg-brand-yellow text-brand-black hover:bg-brand-yellow-deep; }
+  .btn-secondary { @apply bg-brand-black text-paper hover:bg-brand-black-soft; }
+  .btn-outline   { @apply bg-transparent text-brand-black hover:bg-paper-2; }
+  .btn-ghost     { @apply bg-transparent border-transparent hover:bg-paper-2; }
+  .btn-danger    { @apply bg-danger text-white border-danger; }
+  .btn-sm        { @apply h-9 px-3 text-[11px]; }
+  .btn-lg        { @apply h-12 px-6 text-[15px]; }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-1
+           font-mono text-[10px] uppercase tracking-[0.08em] font-semibold;
+  }
+  .badge-dot      { @apply w-1.5 h-1.5 rounded-full; }
+  .b-success  { @apply bg-success-bg text-success; }
+  .b-warn     { @apply bg-warn-bg text-warn; }
+  .b-danger   { @apply bg-danger-bg text-danger; }
+  .b-info     { @apply bg-info-bg text-info; }
+  .b-yellow   { @apply bg-brand-yellow text-brand-black; }
+  .b-black    { @apply bg-brand-black text-brand-yellow; }
+  .b-outline  { @apply bg-transparent text-brand-black border border-brand-black; }
+
+  /* Cards */
+  .card      { @apply bg-surface border border-border shadow-1; }
+  .card-body { @apply p-5; }
+  .card-head {
+    @apply flex justify-between items-center pb-3 mb-3.5
+           border-b-2 border-rule px-5 pt-4;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full px-3.5 py-2.5 border border-border bg-surface
+           font-sans text-[14px] text-ink
+           focus:outline-2 focus:outline-brand-black focus:-outline-offset-1 focus:border-brand-black;
+  }
+
+  /* KPI tile */
+  .kpi {
+    @apply bg-surface border border-border p-[18px];
+  }
+  .kpi-label { @apply font-mono text-[10px] uppercase tracking-[0.1em] text-ink-3; }
+  .kpi-num   { @apply font-serif font-semibold text-[40px] leading-none mt-2; }
+  .kpi-delta { @apply font-mono text-[11px] text-success mt-1.5; }
+  .kpi-delta-down { @apply text-danger; }
+
+  /* Avatar */
+  .avatar {
+    @apply w-8 h-8 rounded-full bg-brand-yellow text-brand-black
+           flex items-center justify-center
+           font-mono font-bold text-[12px] border-2 border-brand-black shrink-0;
+  }
+
+  /* App-shell sidebar item */
+  .nav-item {
+    @apply flex gap-2.5 items-center px-4.5 py-2.5
+           font-sans text-[14px] text-ink-2 cursor-pointer;
+  }
+  .nav-item:hover { @apply bg-paper-2 text-ink; }
+  .nav-item-active { @apply bg-brand-black text-paper; }
 }

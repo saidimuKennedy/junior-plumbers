@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Junior Plumbers · Loyalty &amp; Promotions</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../_shared.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  .layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
+  .kpi-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .two-col { display:grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  .promo-row { display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 100px; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--rule-soft); align-items: center; }
+  .promo-row:last-child { border-bottom: none; }
+  .ref { display:flex; gap:12px; align-items:center; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); }
+  .ref:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-tile"><img src="../../assets/logo-mark.svg" width="28" height="28"/></div><div><div class="wm">Junior Plumbers</div><div class="sub">LOYALTY &amp; PROMOS</div></div></div>
+    <nav><a>Dashboard</a><a class="active">Promotions</a><a>Loyalty</a><a>Referrals</a></nav>
+    <div class="end"><button class="btn btn-primary btn-sm">+ NEW PROMOTION</button><span class="avatar">JM</span></div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="group">Growth</div>
+      <div class="item active"><i data-lucide="megaphone"></i>Promotions</div>
+      <div class="item"><i data-lucide="users"></i>Members</div>
+      <div class="item"><i data-lucide="gift"></i>Rewards rules</div>
+      <div class="item"><i data-lucide="share-2"></i>Referrals</div>
+      <div class="item"><i data-lucide="bar-chart-3"></i>Performance</div>
+      <div class="group">Settings</div>
+      <div class="item"><i data-lucide="settings"></i>Programme rules</div>
+    </aside>
+
+    <main class="page">
+      <div class="page-head">
+        <div class="title-block">
+          <span class="crumb bracket">GROWTH // PROMOS &amp; LOYALTY</span>
+          <h1>Parts &amp; Labour Club</h1>
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm">EXPORT</button>
+          <button class="btn btn-secondary btn-sm">RULES</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="lbl">Active members</div><div class="num">2,418</div><div class="delta">+124 THIS MONTH</div></div>
+        <div class="kpi"><div class="lbl">Points outstanding</div><div class="num">1.84M</div><div class="delta">KES 92,000 LIABILITY</div></div>
+        <div class="kpi"><div class="lbl">Active promos</div><div class="num">4</div><div class="delta">2 ENDING THIS WEEK</div></div>
+        <div class="kpi"><div class="lbl">Referral revenue · 30d</div><div class="num">KES 184k</div><div class="delta">+22.1% vs LAST MONTH</div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">PROMOTIONS // ACTIVE &amp; SCHEDULED</span><span class="meta">8 TOTAL</span></div>
+          <div class="promo-row" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);border-bottom:2px solid var(--rule);"><span>Promotion</span><span>Discount</span><span>Window</span><span>Redemptions</span><span style="text-align:right;">Status</span></div>
+          <div class="promo-row"><div><div style="font-weight:600;">Tools Tuesday</div><div class="meta" style="font-size:11px;color:var(--fg-3);margin-top:2px;">SELECT INGCO POWER TOOLS</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">−15%</div></div><div><div style="font-size:13px;">Tue 09:00 – 18:00</div><div class="meta" style="font-size:11px;">WEEKLY · ALL OUTLETS</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">142</div><div class="meta" style="font-size:11px;">THIS WEEK</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>LIVE</span></div>
+          <div class="promo-row"><div><div style="font-weight:600;">Bulk PVC Pipes</div><div class="meta" style="font-size:11px;color:var(--fg-3);margin-top:2px;">10+ UNITS</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">−8%</div></div><div><div style="font-size:13px;">Oct 1 – Oct 31</div><div class="meta" style="font-size:11px;">ALL OUTLETS</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">68</div><div class="meta" style="font-size:11px;">THIS MONTH</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>LIVE</span></div>
+          <div class="promo-row"><div><div style="font-weight:600;">Trade Day · Karen</div><div class="meta" style="font-size:11px;color:var(--fg-3);margin-top:2px;">TRADE MEMBERS · KAREN ONLY</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">−12%</div></div><div><div style="font-size:13px;">Oct 26 (Sat)</div><div class="meta" style="font-size:11px;">ENDS IN 2 DAYS</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">—</div><div class="meta" style="font-size:11px;">SCHEDULED</div></div><span class="badge b-warn" style="justify-self:end;"><span class="dot" style="background:var(--warn);"></span>SOON</span></div>
+          <div class="promo-row"><div><div style="font-weight:600;">First-time Customer</div><div class="meta" style="font-size:11px;color:var(--fg-3);margin-top:2px;">ONLINE ONLY</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">KES 500</div></div><div><div style="font-size:13px;">Always on</div><div class="meta" style="font-size:11px;">EVERGREEN</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">94</div><div class="meta" style="font-size:11px;">THIS MONTH</div></div><span class="badge b-success" style="justify-self:end;"><span class="dot" style="background:var(--success);"></span>LIVE</span></div>
+          <div class="promo-row"><div><div style="font-weight:600;">Mason's Mid-Week</div><div class="meta" style="font-size:11px;color:var(--fg-3);margin-top:2px;">CEMENT &amp; STEEL</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">−5%</div></div><div><div style="font-size:13px;">Wed only</div><div class="meta" style="font-size:11px;">DRAFT</div></div><div><div class="serif" style="font-size:18px;font-weight:600;">—</div><div class="meta" style="font-size:11px;">UNPUBLISHED</div></div><span class="badge b-outline" style="justify-self:end;">DRAFT</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="ttl bracket">REFERRALS // RECENT</span><span class="meta">7d</span></div>
+          <div class="ref"><span class="avatar">MW</span><div style="flex:1;"><div style="font-weight:600;font-size:14px;">Mary Wanjiku <span class="meta">→</span> Faith Akoth</div><div class="meta" style="font-size:11px;">JOINED · 22 OCT · 1 ORDER</div></div><div class="serif" style="font-size:18px;font-weight:600;">+200</div></div>
+          <div class="ref"><span class="avatar">PO</span><div style="flex:1;"><div style="font-weight:600;font-size:14px;">Peter Otieno <span class="meta">→</span> Bins Hardware</div><div class="meta" style="font-size:11px;">TRADE · 21 OCT · KES 24K</div></div><div class="serif" style="font-size:18px;font-weight:600;">+500</div></div>
+          <div class="ref"><span class="avatar">AK</span><div style="flex:1;"><div style="font-weight:600;font-size:14px;">Angela Kerubo <span class="meta">→</span> 3 friends</div><div class="meta" style="font-size:11px;">RETAIL · 19–21 OCT</div></div><div class="serif" style="font-size:18px;font-weight:600;">+600</div></div>
+          <div class="ref"><span class="avatar">SN</span><div style="flex:1;"><div style="font-weight:600;font-size:14px;">Samuel Njoroge <span class="meta">→</span> George Kimani</div><div class="meta" style="font-size:11px;">RETAIL · 18 OCT · KES 4K</div></div><div class="serif" style="font-size:18px;font-weight:600;">+200</div></div>
+          <div style="padding-top:14px; margin-top:8px; border-top: 2px solid var(--rule); display:flex;justify-content:space-between;align-items:center;">
+            <div><div class="t-bracket" style="font-size:10px;">7-DAY TOTAL</div><div class="serif" style="font-size:24px;font-weight:600;margin-top:4px;">+3,840 PTS · 12 SIGNUPS</div></div>
+            <button class="btn btn-outline btn-sm">SEE ALL</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:16px;"></div>
+
+      <div class="card">
+        <div class="card-head"><span class="ttl bracket">REWARD TIERS // PARTS &amp; LABOUR CLUB</span></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);">
+          <div style="padding:18px;border-right:1px solid var(--border);"><div class="t-bracket" style="font-size:10px;">TIER 01</div><div style="font-family:var(--font-serif);font-size:24px;font-weight:600;margin-top:6px;">Apprentice</div><div class="meta" style="font-size:11px;margin-top:4px;">0 – 999 PTS</div><div style="margin-top:14px;font-size:13px;line-height:1.5;color:var(--fg-2);">1 pt / KES 100 · Birthday voucher · Members-only promos</div></div>
+          <div style="padding:18px;border-right:1px solid var(--border);background:var(--paper-2);"><div class="t-bracket" style="font-size:10px;">TIER 02</div><div style="font-family:var(--font-serif);font-size:24px;font-weight:600;margin-top:6px;">Journeyman</div><div class="meta" style="font-size:11px;margin-top:4px;">1,000 – 4,999 PTS</div><div style="margin-top:14px;font-size:13px;line-height:1.5;color:var(--fg-2);">1.25 pts / KES 100 · Free delivery within Kiserian · Early promo access</div></div>
+          <div style="padding:18px;border-right:1px solid var(--border);background:var(--brand-yellow);"><div class="t-bracket" style="font-size:10px;">TIER 03</div><div style="font-family:var(--font-serif);font-size:24px;font-weight:600;margin-top:6px;">Master</div><div class="meta" style="font-size:11px;margin-top:4px;">5,000 – 14,999 PTS</div><div style="margin-top:14px;font-size:13px;line-height:1.5;">1.5 pts / KES 100 · Free greater-Nairobi delivery · Trade pricing</div></div>
+          <div style="padding:18px;background:var(--brand-black);color:#FAF8F4;"><div class="t-bracket" style="font-size:10px;color:var(--brand-yellow);">TIER 04</div><div style="font-family:var(--font-serif);font-size:24px;font-weight:600;margin-top:6px;">Foreman</div><div class="meta" style="font-size:11px;margin-top:4px;color:#DAD6CC;">15,000+ PTS</div><div style="margin-top:14px;font-size:13px;line-height:1.5;color:#DAD6CC;">2 pts / KES 100 · Dedicated rep · Net-30 trade account</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>
