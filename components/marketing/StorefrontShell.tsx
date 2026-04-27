@@ -3,10 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { Gift, Search, ShoppingBag, User } from "lucide-react";
 import { LoyaltyModalProvider } from "@/components/marketing/LoyaltyModalContext";
 import { LoyaltySignupModal } from "@/components/marketing/LoyaltySignupModal";
+import {
+  StorefrontCartProvider,
+  useStorefrontCart,
+} from "@/components/marketing/StorefrontCartContext";
 import { LOYALTY_STORAGE_ONBOARDED } from "@/lib/loyalty-public";
 
 const NAV = [
@@ -16,10 +20,12 @@ const NAV = [
   { label: "About", href: "/shop/about" },
 ] as const;
 
-export function StorefrontShell({ children }: { children: React.ReactNode }) {
+function StorefrontShellInner({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [loyaltyOpen, setLoyaltyOpen] = useState(false);
   const [clubMember, setClubMember] = useState(false);
+  const { totalQty, hydrated } = useStorefrontCart();
+  const openLoyaltyModal = useCallback(() => setLoyaltyOpen(true), []);
 
   const refreshClubStatus = useCallback(() => {
     try {
@@ -33,7 +39,7 @@ export function StorefrontShell({ children }: { children: React.ReactNode }) {
     refreshClubStatus();
   }, [refreshClubStatus, loyaltyOpen]);
 
-  const openLoyaltyModal = useCallback(() => setLoyaltyOpen(true), []);
+  const cartLabel = hydrated && totalQty > 0 ? `Cart · ${totalQty}` : "Cart";
 
   return (
     <LoyaltyModalProvider onOpen={openLoyaltyModal}>
@@ -70,7 +76,7 @@ export function StorefrontShell({ children }: { children: React.ReactNode }) {
               {NAV.map((item) => {
                 const active =
                   item.href === "/shop"
-                    ? pathname === "/shop"
+                    ? pathname === "/shop" || pathname === "/shop/checkout"
                     : item.href === "/shop/about"
                       ? pathname === "/shop/about"
                       : false;
@@ -135,13 +141,23 @@ export function StorefrontShell({ children }: { children: React.ReactNode }) {
               >
                 <User size={18} />
               </button>
-              <button
-                type="button"
-                className="btn btn-secondary btn-sm flex items-center gap-2"
+              <Link
+                href="/shop/checkout"
+                className="btn btn-secondary btn-sm flex items-center gap-2 no-underline"
+                aria-label={
+                  hydrated && totalQty > 0
+                    ? `Shopping cart, ${totalQty} items`
+                    : "Shopping cart"
+                }
               >
-                <ShoppingBag size={16} strokeWidth={1.75} />{" "}
-                <span className="hidden sm:inline">Cart · 3</span>
-              </button>
+                <ShoppingBag size={16} strokeWidth={1.75} />
+                <span className="hidden sm:inline">{cartLabel}</span>
+                {hydrated && totalQty > 0 ? (
+                  <span className="font-mono text-[11px] tabular-nums sm:hidden">
+                    {totalQty}
+                  </span>
+                ) : null}
+              </Link>
             </div>
           </div>
         </header>
@@ -211,5 +227,13 @@ export function StorefrontShell({ children }: { children: React.ReactNode }) {
         </footer>
       </div>
     </LoyaltyModalProvider>
+  );
+}
+
+export function StorefrontShell({ children }: { children: React.ReactNode }) {
+  return (
+    <StorefrontCartProvider>
+      <StorefrontShellInner>{children}</StorefrontShellInner>
+    </StorefrontCartProvider>
   );
 }

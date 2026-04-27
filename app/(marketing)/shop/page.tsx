@@ -7,6 +7,7 @@ import {
   HardHat,
   Paintbrush,
 } from "lucide-react";
+import { FeaturedProductAddToCart } from "@/components/marketing/FeaturedProductAddToCart";
 import { ShopLoyaltyJoinButton } from "@/components/marketing/ShopLoyaltyJoinButton";
 import { StorefrontShell } from "@/components/marketing/StorefrontShell";
 import { StorefrontImageHero } from "@/components/marketing/StorefrontImageHero";
@@ -124,9 +125,13 @@ export default function StorefrontPage() {
                     )}
                     {fmt(p.price)}
                   </div>
-                  <button type="button" className="btn btn-secondary mt-3 h-auto w-full py-2.5">
-                    Add to cart
-                  </button>
+                  <FeaturedProductAddToCart
+                    sku={p.sku}
+                    name={p.name}
+                    price={p.price}
+                    image={p.image}
+                    className="btn btn-secondary mt-3 h-auto w-full py-2.5"
+                  />
                 </div>
               </div>
             ))}
