@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AtSign, Globe, MessageCircle, Music } from "lucide-react";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { KpiCard } from "@/components/ui/KpiCard";
@@ -25,9 +24,6 @@ export default function SocialPage() {
           <h1 className="font-serif font-semibold text-[36px] leading-[1.05] m-0">This week's calendar</h1>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Link href="/whatsapp" className="btn btn-outline btn-sm no-underline">
-            WhatsApp commerce
-          </Link>
           <button type="button" className="btn btn-outline btn-sm">
             WEEK
           </button>

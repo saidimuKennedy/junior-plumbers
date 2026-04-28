@@ -1,29 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { AtSign, Globe, Heart, MessageCircle, MoreHorizontal, Music, Send, Share2 } from "lucide-react";
 import { useState } from "react";
 import { BracketLabel } from "@/components/ui/BracketLabel";
-import { WhatsAppPhoneMock } from "@/components/whatsapp/WhatsAppPhoneMock";
 import { featuredProducts } from "@/lib/data";
 
 const DEFAULT_CAPTION =
   "Drilling through brick or hanging a frame — the 12V handles both. KES 4,850 today only at any of our six outlets. Tag a friend who's been talking about that DIY project for months.";
 
-type PreviewTab = "ig" | "fb" | "wa" | "tt";
+type PreviewTab = "ig" | "fb" | "tt";
 
 const previewTabs: { id: PreviewTab; label: string }[] = [
   { id: "ig", label: "Instagram" },
   { id: "fb", label: "Facebook" },
-  { id: "wa", label: "WhatsApp" },
   { id: "tt", label: "TikTok" },
 ];
 
 export function SocialComposerWithPreview() {
   const [caption, setCaption] = useState(DEFAULT_CAPTION);
   const [previewTab, setPreviewTab] = useState<PreviewTab>("ig");
-  const [dest, setDest] = useState({ ig: true, fb: true, wa: false, tt: false });
+  const [dest, setDest] = useState({ ig: true, fb: true, tt: false });
 
   const hero = featuredProducts[0];
   const captionSnippet = caption.length > 120 ? `${caption.slice(0, 120).trim()}…` : caption;
@@ -39,13 +36,7 @@ export function SocialComposerWithPreview() {
         <span className="t-meta">DRAFTING</span>
       </div>
 
-      <div
-        className={`grid gap-6 px-5 pb-5 items-start ${
-          previewTab === "wa"
-            ? "lg:grid-cols-[minmax(0,1fr)_minmax(300px,400px)]"
-            : "lg:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]"
-        }`}
-      >
+      <div className="grid gap-6 items-start px-5 pb-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
         <div className="flex min-w-0 flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-3">
@@ -64,7 +55,6 @@ export function SocialComposerWithPreview() {
               [
                 ["ig", "Instagram"],
                 ["fb", "Facebook"],
-                ["wa", "WhatsApp"],
                 ["tt", "TikTok"],
               ] as const
             ).map(([key, label]) => (
@@ -96,12 +86,6 @@ export function SocialComposerWithPreview() {
         <div className="flex min-w-0 flex-col gap-2 border border-border bg-paper-2/50 p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <BracketLabel className="!text-[10px]">PREVIEW · CHANNEL</BracketLabel>
-            <Link
-              href="/whatsapp"
-              className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-3 underline-offset-2 hover:text-ink hover:underline"
-            >
-              Full commerce demo →
-            </Link>
           </div>
 
           <div className="flex flex-wrap gap-1 border border-border bg-surface p-1">
@@ -222,11 +206,6 @@ export function SocialComposerWithPreview() {
             </div>
           ) : null}
 
-          {previewTab === "wa" ? (
-            <div className="flex justify-center pt-1">
-              <WhatsAppPhoneMock />
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
