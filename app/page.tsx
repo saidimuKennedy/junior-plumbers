@@ -10,6 +10,7 @@ import {
   Truck,
   HeartHandshake,
   Share2,
+  MessageCircle,
   ShoppingBag,
   TrendingUp,
   Users,
@@ -59,6 +60,12 @@ const surfaces = [
     blurb: "Leads from social plus a branded shopfront for discovery.",
     href: "/social",
     Icon: Share2,
+  },
+  {
+    name: "WhatsApp commerce",
+    blurb: "Inventory-backed carousel, M-Pesa STK, and confirmations in chat.",
+    href: "/whatsapp",
+    Icon: MessageCircle,
   },
 ] as const;
 

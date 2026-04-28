@@ -1,4 +1,5 @@
 import type { ElementType } from "react";
+import Link from "next/link";
 import { Filter, Search } from "lucide-react";
 import {
   Cable,
@@ -66,6 +67,16 @@ export default function InventoryPage() {
             + NEW PRODUCT
           </button>
         </div>
+      </div>
+
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border border-border bg-brand-yellow-soft px-4 py-3">
+        <p className="m-0 max-w-2xl text-[14px] leading-snug text-ink-2">
+          <span className="font-semibold text-ink">Same SKUs in WhatsApp.</span> Catalogue rows here stay in
+          sync with the trade bot preview — carousel, pricing, and fulfilment hooks on one spine.
+        </p>
+        <Link href="/whatsapp" className="btn btn-outline btn-sm shrink-0 no-underline">
+          Open WhatsApp preview
+        </Link>
       </div>
 
       <div className="mb-6 grid grid-cols-4 gap-4">

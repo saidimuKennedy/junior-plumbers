@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AtSign, Globe, MessageCircle, Music } from "lucide-react";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { KpiCard } from "@/components/ui/KpiCard";
@@ -22,9 +23,16 @@ export default function SocialPage() {
           <BracketLabel>SOCIAL // 4 CHANNELS // OCT 24</BracketLabel>
           <h1 className="font-serif font-semibold text-[36px] leading-[1.05] m-0">This week's calendar</h1>
         </div>
-        <div className="flex gap-2">
-          <button className="btn btn-outline btn-sm">WEEK</button>
-          <button className="btn btn-secondary btn-sm">MONTH</button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link href="/whatsapp" className="btn btn-outline btn-sm no-underline">
+            WhatsApp commerce
+          </Link>
+          <button type="button" className="btn btn-outline btn-sm">
+            WEEK
+          </button>
+          <button type="button" className="btn btn-secondary btn-sm">
+            MONTH
+          </button>
         </div>
       </div>
 

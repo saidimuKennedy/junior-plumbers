@@ -16,7 +16,7 @@ import { LOYALTY_STORAGE_ONBOARDED } from "@/lib/loyalty-public";
 const NAV = [
   { label: "Shop", href: "/shop" },
   { label: "Categories", href: "/shop#categories" },
-  { label: "Promotions", href: "/shop#promos" },
+  { label: "Promotions", href: "/shop/promotions" },
   { label: "About", href: "/shop/about" },
 ] as const;
 
@@ -79,7 +79,9 @@ function StorefrontShellInner({ children }: { children: ReactNode }) {
                     ? pathname === "/shop" || pathname === "/shop/checkout"
                     : item.href === "/shop/about"
                       ? pathname === "/shop/about"
-                      : false;
+                      : item.href === "/shop/promotions"
+                        ? pathname === "/shop/promotions"
+                        : false;
                 return (
                   <Link
                     key={item.href}

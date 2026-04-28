@@ -490,6 +490,23 @@ export const featuredProducts = [
   },
 ] as const;
 
+/** Same SKUs as catalogue / shop — used in WhatsApp commerce preview. */
+export const whatsappPreviewCarouselProducts = [
+  featuredProducts[0],
+  featuredProducts[1],
+  featuredProducts[2],
+] as const;
+
+export const whatsappPreviewMeta = {
+  businessName: "Junior Plumbers",
+  chatSubtitle: "Kiserian Main · catalogue",
+  orderRef: "JP-WA-28491",
+  mpesaMasked: "07** *** *47",
+  stkAmountKes: 5_050,
+  productLine: { name: "Ingco Cordless Drill 12V", sku: "ING-CD45-12V", qty: 1, unitKes: 4_850 },
+  deliveryKes: 200,
+} as const;
+
 export const loyaltyStats = [
   { n: "2,400+", l: "Members" },
   { n: "5%",     l: "Avg. saving / order" },

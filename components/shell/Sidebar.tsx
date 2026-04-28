@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BarChart3, Store, Package, Receipt, Truck,
-  Megaphone, Users, MessageSquare, Settings, Share2,
+  Megaphone, Users, MessageSquare, Settings, Share2, MessageCircle,
 } from "lucide-react";
 
 const ops = [
@@ -19,6 +19,7 @@ const growth = [
   { label: "Promotions",    href: "/loyalty",    Icon: Megaphone     },
   { label: "Loyalty",       href: "/loyalty",    Icon: Users         },
   { label: "Social & Leads",href: "/social",     Icon: MessageSquare },
+  { label: "WhatsApp",      href: "/whatsapp",   Icon: MessageCircle },
   { label: "Online Shop",   href: "/shop",       Icon: Share2        },
 ];
 
