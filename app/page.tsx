@@ -129,19 +129,19 @@ export default function InvestorLandingPage() {
               Editorial systems · Ingco-class yellow · Nairobi trade corridor
             </p>
           </div>
-          <div className="relative aspect-[4/5] max-h-[520px] border-[3px] border-brand-black bg-brand-yellow md:mx-0">
+          <div className="relative aspect-square w-full md:aspect-[4/5] md:min-h-[600px] border-[3px] border-brand-black bg-brand-yellow md:mx-0">
             <div className="absolute inset-3 overflow-hidden border border-brand-black/35">
               <Image
-                src="https://images.pexels.com/photos/8811529/pexels-photo-8811529.jpeg"
-                alt="Cordless power tool — category hero"
+                src="/images/kenyan-hardware-hero.png"
+                alt="Kenyan hardware store exterior"
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 480px"
+                sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
             </div>
             <div className="pointer-events-none absolute left-5 top-5 z-10 max-w-[85%] font-mono text-[10px] uppercase tracking-[0.18em] text-paper [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">
-              [ Category leadership · power tools ]
+              [ High-velocity retail · Operations hub ]
             </div>
           </div>
         </section>
