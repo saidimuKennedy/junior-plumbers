@@ -94,9 +94,9 @@ export default function StorefrontPage() {
         <div className="mx-auto max-w-[1280px]">
           <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4 border-b-2 border-rule pb-4">
             <h2 className="m-0 font-serif text-[clamp(1.6rem,3.5vw,2rem)] font-semibold">Tools Tuesday · this week</h2>
-            <span className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3 hover:text-ink">
+            <a href="/shop/promotions" className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3 no-underline hover:text-ink">
               View all promos →
-            </span>
+            </a>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((p) => (
