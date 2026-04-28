@@ -254,19 +254,35 @@
     animation: jp-loyalty-modal-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
+  @keyframes jp-wa-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .jp-wa-fade-up {
+    animation: jp-wa-fade-up 0.38s ease-out both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .jp-shop-promo-strip::before,
     .jp-shop-promo-eyebrow,
     .jp-loyalty-shimmer,
     .jp-text-sparkle,
     .jp-loyalty-burst,
-    .jp-loyalty-modal-inner {
+    .jp-loyalty-modal-inner,
+    .jp-wa-fade-up {
       animation: none !important;
     }
     .jp-loyalty-burst {
       transform: none;
     }
-    .jp-loyalty-modal-inner {
+    .jp-loyalty-modal-inner,
+    .jp-wa-fade-up {
       opacity: 1;
       transform: none;
     }

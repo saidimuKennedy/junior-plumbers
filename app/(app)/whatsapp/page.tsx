@@ -102,9 +102,6 @@ export default function WhatsAppPreviewPage() {
 
         <div className="flex flex-col items-center lg:sticky lg:top-24">
           <WhatsAppPhoneMock />
-          <p className="mt-4 max-w-[260px] text-center font-mono text-[10px] uppercase tracking-[0.1em] text-ink-3">
-            Demo UI only · no live WhatsApp or M-Pesa
-          </p>
         </div>
       </div>
     </>
