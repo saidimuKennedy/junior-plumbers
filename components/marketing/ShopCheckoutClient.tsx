@@ -1,9 +1,11 @@
 "use client";
 
 import confetti from "canvas-confetti";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Banknote, Building2, Check, Smartphone } from "lucide-react";
+import { Banknote, Building2, Check, Smartphone, ShoppingBag, Trash2, Minus, Plus } from "lucide-react";
+import { BracketLabel } from "@/components/ui/BracketLabel";
 import { useStorefrontCart } from "@/components/marketing/StorefrontCartContext";
 import {
   buildInvoiceHtml,
@@ -222,8 +224,12 @@ export function ShopCheckoutClient() {
       </p>
 
       {lines.length === 0 ? (
-        <div className="mt-10 border-2 border-dashed border-border bg-paper-2 p-8 text-center">
-          <p className="m-0 font-serif text-[1.1rem]">Your cart is empty.</p>
+        <div className="mt-12 border-2 border-dashed border-border bg-paper-2 p-12 text-center">
+          <div className="w-16 h-16 mx-auto mb-4 border-2 border-brand-black bg-brand-yellow flex items-center justify-center">
+            <ShoppingBag className="w-8 h-8 text-brand-black" strokeWidth={2} />
+          </div>
+          <h2 className="font-serif text-[1.5rem] font-semibold m-0">Your cart is empty</h2>
+          <p className="mt-2 font-serif text-[1rem] text-ink-2">Add some tools and supplies to get started</p>
           <Link href="/shop#promos" className="btn btn-primary btn-lg mt-6 inline-flex no-underline">
             Browse promos
           </Link>
@@ -231,67 +237,111 @@ export function ShopCheckoutClient() {
       ) : (
         <>
           <section className="mt-10">
-            <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-ink-3">Cart</h2>
-            <ul className="mt-4 divide-y divide-rule-soft border-2 border-rule bg-surface">
-              {lines.map((l) => (
-                <li key={l.sku} className="flex flex-wrap items-center gap-4 px-4 py-4">
-                  <div className="min-w-0 flex-1">
-                    <div className="font-sans text-[14px] font-semibold">{l.name}</div>
-                    <div className="font-mono text-[10px] text-ink-3">{l.sku}</div>
-                    <div className="mt-1 font-serif text-[15px]">{fmtKes(l.price)} each</div>
+            <div className="flex items-center gap-3 mb-4">
+              <ShoppingBag className="w-5 h-5 text-brand-black" strokeWidth={2} />
+              <BracketLabel>CART // {lines.length} ITEM{lines.length > 1 ? 'S' : ''}</BracketLabel>
+            </div>
+
+            <div className="border-2 border-rule bg-surface">
+              {lines.map((l, idx) => (
+                <div
+                  key={l.sku}
+                  className={`grid grid-cols-[80px_1fr_auto] gap-4 p-4 ${idx > 0 ? 'border-t border-rule-soft' : ''}`}
+                >
+                  {/* Product Image */}
+                  <div className="w-20 h-20 border-2 border-rule bg-paper-2 flex items-center justify-center overflow-hidden">
+                    {l.image ? (
+                      <Image
+                        src={l.image}
+                        alt={l.name}
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-brand-yellow/20 flex items-center justify-center">
+                        <ShoppingBag className="w-6 h-6 text-brand-black/40" />
+                      </div>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <label className="sr-only" htmlFor={`qty-${l.sku}`}>
-                      Quantity for {l.name}
-                    </label>
-                    <input
-                      id={`qty-${l.sku}`}
-                      type="number"
-                      min={1}
-                      value={l.qty}
-                      onChange={(e) => setLineQty(l.sku, Number(e.target.value))}
-                      className="w-16 border-2 border-brand-black bg-paper px-2 py-1.5 font-mono text-[13px] tabular-nums"
-                    />
+
+                  {/* Product Info */}
+                  <div className="min-w-0 flex flex-col justify-center">
+                    <div className="font-sans text-[15px] font-semibold leading-tight">{l.name}</div>
+                    <div className="font-mono text-[10px] text-ink-3 mt-1">{l.sku}</div>
+                    <div className="mt-2 font-serif text-[16px] font-medium text-ink-2">{fmtKes(l.price)} each</div>
+                  </div>
+
+                  {/* Controls & Price */}
+                  <div className="flex flex-col items-end justify-between gap-2">
                     <button
                       type="button"
-                      className="font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-danger underline-offset-2 hover:underline"
                       onClick={() => removeLine(l.sku)}
+                      className="p-1.5 text-ink-3 hover:text-danger hover:bg-danger-bg transition-colors"
+                      aria-label={`Remove ${l.name}`}
                     >
-                      Remove
+                      <Trash2 size={16} strokeWidth={2} />
                     </button>
+
+                    {/* Quantity Stepper */}
+                    <div className="flex items-center border-2 border-brand-black">
+                      <button
+                        type="button"
+                        onClick={() => setLineQty(l.sku, l.qty - 1)}
+                        className="w-8 h-8 flex items-center justify-center bg-paper hover:bg-paper-2 transition-colors"
+                        disabled={l.qty <= 1}
+                      >
+                        <Minus size={14} strokeWidth={2.5} />
+                      </button>
+                      <span className="w-10 h-8 flex items-center justify-center font-mono text-[13px] font-semibold tabular-nums bg-paper border-x-2 border-brand-black">
+                        {l.qty}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setLineQty(l.sku, l.qty + 1)}
+                        className="w-8 h-8 flex items-center justify-center bg-paper hover:bg-paper-2 transition-colors"
+                      >
+                        <Plus size={14} strokeWidth={2.5} />
+                      </button>
+                    </div>
+
+                    {/* Line Total */}
+                    <div className="font-serif text-[1.1rem] font-semibold text-brand-black">
+                      {fmtKes(l.price * l.qty)}
+                    </div>
                   </div>
-                  <div className="w-full text-right font-serif text-[1.1rem] font-semibold sm:w-28 sm:flex-none">
-                    {fmtKes(l.price * l.qty)}
-                  </div>
-                </li>
+                </div>
               ))}
-            </ul>
-            <div className="mt-4 flex justify-end border-t-2 border-brand-black pt-4">
-              <div className="font-serif text-[1.25rem] font-semibold">Subtotal {fmtKes(subtotal)}</div>
+            </div>
+
+            {/* Subtotal */}
+            <div className="mt-4 flex justify-between items-center border-t-2 border-brand-black pt-4">
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-3">Subtotal</span>
+              <div className="font-serif text-[1.5rem] font-semibold">{fmtKes(subtotal)}</div>
             </div>
           </section>
 
           <section className="mt-12">
-            <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-ink-3">Your details</h2>
+            <BracketLabel>DETAILS // CONTACT</BracketLabel>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <label className="block">
-                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-3">Full name (optional)</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-3">Full name <span className="text-ink-4">(optional)</span></span>
                 <input
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="mt-1.5 w-full border-2 border-brand-black bg-surface px-3 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-brand-yellow"
+                  className="mt-1.5 w-full border-2 border-brand-black bg-surface px-3 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-brand-yellow transition-shadow"
                   placeholder="e.g. Mary Wanjiku"
                   autoComplete="name"
                 />
               </label>
               <label className="block">
                 <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-3">
-                  Mobile {paymentMethod === "mpesa" ? "(required for M-Pesa)" : "(optional)"}
+                  Mobile <span className={paymentMethod === "mpesa" ? "text-brand-black font-semibold" : "text-ink-4"}>{paymentMethod === "mpesa" ? "(required for M-Pesa)" : "(optional)"}</span>
                 </span>
                 <input
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
-                  className="mt-1.5 w-full border-2 border-brand-black bg-surface px-3 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-brand-yellow"
+                  className="mt-1.5 w-full border-2 border-brand-black bg-surface px-3 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-brand-yellow transition-shadow"
                   placeholder="07XX XXX XXX"
                   inputMode="tel"
                   autoComplete="tel"
@@ -301,7 +351,7 @@ export function ShopCheckoutClient() {
           </section>
 
           <section className="mt-12">
-            <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-ink-3">Payment method</h2>
+            <BracketLabel>PAYMENT // METHOD</BracketLabel>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {PAYMENTS.map((p) => {
                 const Icon = p.icon;
@@ -311,14 +361,16 @@ export function ShopCheckoutClient() {
                     key={p.id}
                     type="button"
                     onClick={() => setPaymentMethod(p.id)}
-                    className={`flex flex-col items-start gap-2 border-2 p-4 text-left transition-colors ${
+                    className={`flex flex-col items-start gap-2 border-2 p-4 text-left transition-all ${
                       active
                         ? "border-brand-black bg-brand-yellow shadow-1"
-                        : "border-border bg-surface hover:border-brand-black"
+                        : "border-border bg-surface hover:border-brand-black hover:shadow-1"
                     }`}
                   >
-                    <Icon size={22} strokeWidth={1.75} className="text-brand-black" aria-hidden />
-                    <span className="font-sans text-[13px] font-semibold uppercase tracking-[0.05em]">{p.label}</span>
+                    <div className={`w-10 h-10 flex items-center justify-center ${active ? 'bg-brand-black' : 'bg-paper-2'}`}>
+                      <Icon size={20} strokeWidth={2} className={active ? "text-brand-yellow" : "text-brand-black"} aria-hidden />
+                    </div>
+                    <span className="font-sans text-[13px] font-semibold uppercase tracking-[0.05em] mt-1">{p.label}</span>
                     <span className="font-mono text-[10px] leading-snug text-ink-3">{p.sub}</span>
                   </button>
                 );
@@ -327,14 +379,15 @@ export function ShopCheckoutClient() {
           </section>
 
           {payError && (
-            <p className="mt-6 border-2 border-danger bg-danger-bg px-4 py-3 font-sans text-[13px] text-danger" role="alert">
-              {payError}
-            </p>
+            <div className="mt-6 border-2 border-danger bg-danger-bg px-4 py-3 flex items-start gap-3" role="alert">
+              <div className="w-6 h-6 bg-danger text-white flex items-center justify-center shrink-0 font-mono text-[12px] font-bold">!</div>
+              <p className="font-sans text-[13px] text-danger m-0">{payError}</p>
+            </div>
           )}
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <button type="button" className="btn btn-primary btn-lg" onClick={placeOrder}>
-              Pay {fmtKes(subtotal)}
+          <div className="mt-10 flex flex-wrap items-center gap-3 pt-6 border-t-2 border-rule">
+            <button type="button" className="btn btn-primary btn-lg shadow-1" onClick={placeOrder}>
+              <span className="font-serif">Pay {fmtKes(subtotal)}</span>
             </button>
             <Link href="/shop#promos" className="btn btn-outline btn-lg no-underline">
               Back to shop

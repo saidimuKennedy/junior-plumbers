@@ -239,7 +239,7 @@ export default function InvestorLandingPage() {
           <div className="mx-auto max-w-[1200px]">
             <BracketLabel className="!text-brand-yellow">Why now</BracketLabel>
             <h2 className="mt-3 font-serif text-[2.25rem] font-semibold text-paper md:text-[2.75rem]">
-              Proof on the ground — not just in Figma.
+              Proof iko kwa Kazi - Kuja Ground!
             </h2>
             <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {traction.map(({ n, l, Icon }) => (

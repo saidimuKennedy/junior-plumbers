@@ -7,6 +7,5 @@ export const marketingImagery = {
     "https://images.pexels.com/photos/7213329/pexels-photo-7213329.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
   aboutValues:
     "https://images.pexels.com/photos/4484077/pexels-photo-4484077.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80",
-  loyaltyHero:
-    "https://images.pexels.com/photos/8960865/pexels-photo-8960865.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80",
+  loyaltyHero: "/images/kenyan-hardware-hero.png",
 } as const;

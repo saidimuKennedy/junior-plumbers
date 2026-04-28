@@ -1,15 +1,15 @@
-import { AtSign, Globe, MessageCircle, Music } from "lucide-react";
+import Image from "next/image";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { KpiCard } from "@/components/ui/KpiCard";
 import { Badge } from "@/components/ui/Badge";
 import { SocialComposerWithPreview } from "@/components/social/SocialComposerWithPreview";
 import { socialKpis, scheduledPosts, leads } from "@/lib/data";
 
-const channelIcon: Record<string, { Icon: React.ElementType; bg: string; fg: string }> = {
-  ig: { Icon: AtSign,         bg: "bg-brand-black", fg: "text-brand-yellow" },
-  fb: { Icon: Globe,          bg: "bg-info",        fg: "text-white"        },
-  wa: { Icon: MessageCircle,  bg: "bg-success",     fg: "text-white"        },
-  tt: { Icon: Music,          bg: "bg-brand-black", fg: "text-white"        },
+const channelIcon: Record<string, { src: string; style: React.CSSProperties }> = {
+  ig: { src: "/icons/instagram.svg", style: { backgroundColor: "#E4405F" } },
+  fb: { src: "/icons/facebook.svg",  style: { backgroundColor: "#1877F2" } },
+  wa: { src: "/icons/whatsapp.svg",  style: { backgroundColor: "#25D366" } },
+  tt: { src: "/icons/tiktok.svg",    style: { backgroundColor: "#000000" } },
 };
 
 type StatusType = "success" | "warn" | "outline" | "info" | "danger";
@@ -53,8 +53,14 @@ export default function SocialPage() {
               const ch = channelIcon[post.channel] ?? channelIcon.ig;
               return (
                 <div key={i} className="grid grid-cols-[56px_1fr_auto] gap-3.5 py-4 border-b border-rule-soft last:border-none items-start">
-                  <div className={`w-11 h-11 border-2 border-brand-black flex items-center justify-center shrink-0 ${ch.bg} ${ch.fg}`}>
-                    <ch.Icon size={20} strokeWidth={1.75} />
+                  <div className="w-11 h-11 flex items-center justify-center shrink-0 p-2" style={ch.style}>
+                    <Image
+                      src={ch.src}
+                      alt={post.channel}
+                      width={28}
+                      height={28}
+                      className="w-7 h-7 invert"
+                    />
                   </div>
                   <div>
                     <div className="font-semibold text-[14px]">{post.title}</div>
