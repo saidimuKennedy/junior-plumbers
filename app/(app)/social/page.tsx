@@ -3,6 +3,7 @@ import { AtSign, Globe, MessageCircle, Music } from "lucide-react";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { KpiCard } from "@/components/ui/KpiCard";
 import { Badge } from "@/components/ui/Badge";
+import { SocialComposerWithPreview } from "@/components/social/SocialComposerWithPreview";
 import { socialKpis, scheduledPosts, leads } from "@/lib/data";
 
 const channelIcon: Record<string, { Icon: React.ElementType; bg: string; fg: string }> = {
@@ -104,46 +105,7 @@ export default function SocialPage() {
         </div>
       </div>
 
-      {/* Quick composer */}
-      <div className="card">
-        <div className="card-head">
-          <BracketLabel>COMPOSER // QUICK POST</BracketLabel>
-          <span className="t-meta">DRAFTING</span>
-        </div>
-        <div className="grid grid-cols-[1fr_280px] gap-6 px-5 pb-5 items-start">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1.5">
-              <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-3">Caption · serif italic preview</span>
-              <textarea
-                className="input font-serif italic text-[16px]"
-                rows={4}
-                defaultValue="Drilling through brick or hanging a frame — the 12V handles both. KES 4,850 today only at any of our six outlets. Tag a friend who's been talking about that DIY project for months."
-              />
-            </div>
-            <div className="flex gap-4 text-[14px]">
-              {["Instagram", "Facebook", "WhatsApp", "TikTok"].map((ch, i) => (
-                <label key={ch} className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" defaultChecked={i < 2} /> {ch}
-                </label>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <button className="btn btn-outline btn-sm">SAVE DRAFT</button>
-              <button className="btn btn-secondary btn-sm">SCHEDULE</button>
-              <button className="btn btn-primary btn-sm">PUBLISH NOW →</button>
-            </div>
-          </div>
-          <div className="border border-border p-3.5">
-            <BracketLabel>PREVIEW · INSTAGRAM</BracketLabel>
-            <div className="aspect-square bg-brand-yellow border-2 border-brand-black mt-2.5 flex items-center justify-center">
-              <svg width="60%" height="60%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={0.8}><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-            </div>
-            <div className="font-serif italic text-[13px] text-ink-2 mt-2.5 leading-snug">
-              Drilling through brick or hanging a frame — the 12V handles both…
-            </div>
-          </div>
-        </div>
-      </div>
+      <SocialComposerWithPreview />
     </>
   );
 }
